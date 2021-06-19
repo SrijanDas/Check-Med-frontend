@@ -1,0 +1,15 @@
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.loginPage__card {
+  width: 22rem;
+}
+
+@media (max-width: 480px) {
+  .loginPage__card {
+    width: 100%;
+  }
+}

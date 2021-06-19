@@ -14,7 +14,11 @@ function StyledNavbar() {
               CheckMed
             </Link>
           </Navbar.Brand>
-          <Button variant="success">Shop Login</Button>
+          <Button variant="success">
+            <Link className="applink" style={{ color: "white" }} to="/login">
+              Shop Login
+            </Link>
+          </Button>
         </Container>
       </Navbar>
     </div>

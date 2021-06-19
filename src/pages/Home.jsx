@@ -1,14 +1,14 @@
 import React from "react";
 import ShopCard from "../components/ShopCard";
 import SearchForm from "../components/SearchForm";
-import UserLocationCard from "../components/UserLocationCard";
+// import UserLocationCard from "../components/UserLocationCard";
 
 function Home() {
   return (
     <div>
       <SearchForm />
 
-      <UserLocationCard />
+      {/* <UserLocationCard /> */}
 
       <h4 style={{ fontWeight: 400 }} className="mt-5">
         Medicine available here..
