@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRef } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Form from "react-bootstrap/Form";
 
 function SearchForm() {
   const [btnSelect, setBtnSelect] = useState("1");
+  const searchBy = useRef();
+  useEffect(() => {
+    searchBy.current = btnSelect;
+  }, [btnSelect]);
 
   const buttons = [
     { name: "Search by PIN", value: "1" },
@@ -22,7 +27,10 @@ function SearchForm() {
           {buttons.map((btn, idx) => (
             <Button
               key={idx}
-              variant={btnSelect === btn.value ? "primary" : "outline-primary"}
+              className="mb-3"
+              variant={
+                btnSelect === btn.value ? "primary" : "outline-secondary"
+              }
               onClick={() => {
                 setBtnSelect(btn.value);
               }}
@@ -31,11 +39,12 @@ function SearchForm() {
             </Button>
           ))}
         </ButtonGroup>
-        <Button size="lg" variant="primary" className="mb-2">
+        <Form.Control type="text" placeholder="Enter PIN" />
+
+        <Button variant="primary" className="mt-3 btn-block">
           Search
         </Button>
       </Form>
-      {btnSelect}
     </>
   );
 }
