@@ -2,9 +2,10 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 
 function ShopCard({ inStock }) {
-  const bg = inStock <= 10 ? "#DC3545" : "#198754";
-  const header = inStock <= 10 ? "Only Few Left" : "In Stock";
-  const statusColor = inStock <= 10 ? "#DC3545" : "#198754";
+  const lowStock = inStock <= 10 ? true : false;
+  const bg = lowStock ? "#DC3545" : "#198754";
+  const header = lowStock ? "Only Few Left" : "In Stock";
+  const statusColor = lowStock ? "#DC3545" : "#198754";
 
   return (
     <div>
@@ -18,13 +19,16 @@ function ShopCard({ inStock }) {
             MB Road, Howrah-711104
           </Card.Subtitle>
           <Card.Text style={{ color: statusColor, fontWeight: 500 }}>
-            Status: Available ({inStock})
+            Qty: {inStock}
           </Card.Text>
           <Card.Link href="#">
             <i className="fas fa-map-marker-alt mr-2"></i>
             Location
           </Card.Link>
         </Card.Body>
+        <Card.Footer className="text-muted">
+          Last Updated: 2 days ago
+        </Card.Footer>
       </Card>
     </div>
   );
