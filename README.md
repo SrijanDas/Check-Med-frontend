@@ -2,7 +2,7 @@
 
 Check the availabilty of medicines in your nearest medicine shops.
 
-Backend: Django\
+Backend: Python, Django\
 Frontend: Reactjs, Material UI, Material Table\
 Database: Sqlite3\
 Hosting: Heroku, Firebase
