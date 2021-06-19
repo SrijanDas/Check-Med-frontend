@@ -21,8 +21,6 @@ function SearchForm() {
     <>
       <h3 className="mt-4">Search for a medicine...</h3>
       <Form>
-        <Form.Control type="text" placeholder="Enter medicine name" />
-
         <ButtonGroup className="mt-3">
           {buttons.map((btn, idx) => (
             <Button
@@ -39,7 +37,13 @@ function SearchForm() {
             </Button>
           ))}
         </ButtonGroup>
-        <Form.Control type="text" placeholder="Enter PIN" />
+        <Form.Control
+          type="text"
+          className="mb-2"
+          placeholder="Enter medicine name"
+          required
+        />
+        <Form.Control type="text" placeholder="Enter PIN" required />
 
         <Button variant="primary" className="mt-3 btn-block">
           Search
