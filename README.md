@@ -2,9 +2,9 @@
 
 Check the availabilty of medicines in your nearest medicine shops.
 
-Backend: Yet to Decide\
-Frontend: Reactjs, Bootstrap, Material Table\
-Database: MongoDb\
-Hosting: Firebase
+Backend: Django\
+Frontend: Reactjs, Material UI, Material Table\
+Database: Sqlite3\
+Hosting: Heroku, Firebase
 
 ### Deployed link - https://check-med.web.app
