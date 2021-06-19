@@ -10,6 +10,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import ScrollToTop from "./components/ScrollToTop";
 import Container from "react-bootstrap/Container";
 import Footer from "./components/Footer/Footer";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
             </Route>
             <Route path="/sign-up">
               <SignUp />
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard />
             </Route>
           </Switch>
         </Container>

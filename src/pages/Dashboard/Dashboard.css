@@ -1,0 +1,27 @@
+.dashboard__title {
+  font-weight: 400;
+}
+.dashboard p {
+  margin-bottom: 0;
+}
+.dashboard__cardsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+}
+.dashboard__card {
+  /* height: 12rem; */
+  width: 18rem;
+  display: block;
+}
+.dashboard__cardsName {
+  font-weight: 400;
+  margin: auto;
+}
+@media (max-width: 768px) {
+  .dashboard__cardsContainer {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
