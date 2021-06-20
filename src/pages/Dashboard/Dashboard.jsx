@@ -30,7 +30,7 @@ function Dashboard() {
               Inventory
             </span>
             <div className="dashboard__cardInfo">
-              <h1>20k</h1>
+              <h1>₹​ 20k</h1>
             </div>
             <span className="dashboard__cardFooter">
               Last Updated: 2 days ago
@@ -48,9 +48,9 @@ function Dashboard() {
               Sales
             </span>
             <div className="dashboard__cardInfo">
-              <h1>12k</h1>{" "}
+              <h1>₹​ 12k</h1>{" "}
               <p>
-                2.5 <ArrowDownwardIcon />
+                2.5% <ArrowDownwardIcon />
               </p>
             </div>
             <span className="dashboard__cardFooter">
