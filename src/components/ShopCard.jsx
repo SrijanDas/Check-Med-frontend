@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
 
 function ShopCard({ inStock }) {
   const lowStock = inStock <= 10 ? true : false;
@@ -22,7 +23,7 @@ function ShopCard({ inStock }) {
             Qty: {inStock}
           </Card.Text>
           <Card.Link href="#">
-            <i className="fas fa-map-marker-alt mr-2"></i>
+            <LocationOnIcon />
             Location
           </Card.Link>
         </Card.Body>

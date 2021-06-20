@@ -1,0 +1,15 @@
+.signupPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.signup_card {
+  margin-top: 2rem;
+  width: 80%;
+}
+@media (max-width: 480px) {
+  .signup_card {
+    width: 100%;
+  }
+}

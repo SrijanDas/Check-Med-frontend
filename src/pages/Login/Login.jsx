@@ -8,10 +8,10 @@ import { Link } from "react-router-dom";
 function Login() {
   return (
     <div className="loginPage">
-      <h1 style={{ fontWeight: 400, textAlign: "center" }} className="my-4">
-        Login
-      </h1>
       <Card className="loginPage__card">
+        <h1 style={{ fontWeight: 400, textAlign: "center" }} className="my-4">
+          Login
+        </h1>
         <Card.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

@@ -3,14 +3,15 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
+import "./SignUp.css";
 
 function SignUp() {
   return (
-    <div className="loginPage">
-      <h1 style={{ fontWeight: 400, textAlign: "center" }} className="my-4">
-        Create New Account
-      </h1>
-      <Card className="loginPage__card">
+    <div className="signupPage">
+      <Card className="signup_card">
+        <h1 style={{ fontWeight: 400, textAlign: "center" }} className="my-4">
+          Create New Account
+        </h1>
         <Card.Body>
           <Form>
             <Form.Group className="mb-3">
@@ -50,11 +51,12 @@ function SignUp() {
               Create Account
             </Button>
           </Form>
-          <Link style={{ textDecoration: "none" }} to="/login">
-            <Button className="my-2 btn-block" variant="success">
+          <p className="mt-4">
+            Already have an account?{" "}
+            <Link style={{ textDecoration: "none" }} to="/login">
               Login
-            </Button>
-          </Link>
+            </Link>
+          </p>
         </Card.Body>
       </Card>
     </div>
