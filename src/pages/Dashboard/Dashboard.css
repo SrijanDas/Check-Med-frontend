@@ -1,27 +1,75 @@
+.dashboard__shopDetails {
+  margin-top: 1rem;
+}
 .dashboard__title {
   font-weight: 400;
 }
 .dashboard p {
   margin-bottom: 0;
 }
+.dashboard__tools {
+  margin-top: 2rem;
+}
 .dashboard__cardsContainer {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  cursor: pointer;
 }
 .dashboard__card {
-  /* height: 12rem; */
+  border-radius: 15px;
+  cursor: pointer;
+
+  padding: 1rem;
   width: 18rem;
   display: block;
 }
-.dashboard__cardsName {
-  font-weight: 400;
-  margin: auto;
+
+.dashboard__cardTitle {
+  display: flex;
+  align-items: center;
 }
+
+.dashboard__cardInfo {
+  display: flex;
+  align-items: center;
+}
+.dashboard__cardInfo p {
+  margin-left: 1rem;
+}
+
+.dashboard__card.inventory {
+  border: 4px solid #e3f2fd;
+  color: #1976d2;
+}
+
+.dashboard__card.inventory.active {
+  background-color: #e3f2fd;
+  border-color: #1976d2;
+}
+
+.dashboard__card.sales {
+  border: 4px solid #fce4ec;
+  color: #f50057;
+}
+.dashboard__card.sales.active {
+  background-color: #fce4ec;
+  border-color: #f50057;
+}
+.dashboard__card.reports {
+  border: 4px solid #fff3e0;
+  color: #f57c00;
+}
+.dashboard__card.reports.active {
+  background-color: #fff3e0;
+  border-color: #f57c00;
+}
+
 @media (max-width: 768px) {
   .dashboard__cardsContainer {
     flex-direction: column;
     justify-content: center;
+  }
+  .dashboard__card {
+    margin-top: 1rem;
   }
 }
