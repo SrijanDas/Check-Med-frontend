@@ -43,7 +43,7 @@ function SearchForm() {
         ) : btnSelect === "2" ? (
           <Form.Control type="text" placeholder="Select District" required />
         ) : (
-          <h2>Coming Soon...</h2>
+          <h3>Coming Soon...</h3>
         )}
 
         <Button variant="primary" className="mt-3 btn-block">
