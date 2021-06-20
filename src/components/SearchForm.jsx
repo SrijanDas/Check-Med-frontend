@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useRef } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Form from "react-bootstrap/Form";
 
 function SearchForm() {
   const [btnSelect, setBtnSelect] = useState("1");
-  const searchBy = useRef();
-  useEffect(() => {
-    searchBy.current = btnSelect;
-  }, [btnSelect]);
 
   const buttons = [
     { name: "Search by PIN", value: "1" },
@@ -43,7 +38,13 @@ function SearchForm() {
           placeholder="Enter medicine name"
           required
         />
-        <Form.Control type="text" placeholder="Enter PIN" required />
+        {btnSelect === "1" ? (
+          <Form.Control type="text" placeholder="Enter PIN" required />
+        ) : btnSelect === "2" ? (
+          <Form.Control type="text" placeholder="Select District" required />
+        ) : (
+          <h2>Coming Soon...</h2>
+        )}
 
         <Button variant="primary" className="mt-3 btn-block">
           Search
