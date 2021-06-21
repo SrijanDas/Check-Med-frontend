@@ -1,18 +1,1 @@
-.loginPage {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.loginPage__card {
-  width: 22rem;
-  margin-top: 2rem;
-  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-}
 
-@media (max-width: 480px) {
-  .loginPage__card {
-    width: 100%;
-  }
-}
