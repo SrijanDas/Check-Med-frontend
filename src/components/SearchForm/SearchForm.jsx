@@ -5,7 +5,13 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Form from "react-bootstrap/Form";
 import "./SearchForm.css";
 
-function SearchForm() {
+function SearchForm({
+  handleSearch,
+  medicineName,
+  setMedicineName,
+  query,
+  setQuery,
+}) {
   const [btnSelect, setBtnSelect] = useState("1");
 
   const buttons = [
@@ -14,7 +20,7 @@ function SearchForm() {
     { name: "Search by Map", value: "3" },
   ];
 
-  const SearchMethod = ({ searchMode }) => {
+  const SearchMethod = ({ searchMode, setMedicineName, setQuery }) => {
     if (searchMode === "3") {
       return (
         <>
@@ -29,11 +35,21 @@ function SearchForm() {
             className="mb-2"
             placeholder="Enter medicine name"
             required
+            onChangeCapture={(e) => {
+              setMedicineName(e.target.value);
+            }}
           />
           {searchMode === "2" ? (
             <Form.Control type="text" placeholder="Select District" required />
           ) : (
-            <Form.Control type="text" placeholder="Enter PIN" required />
+            <input
+              type="text"
+              placeholder="Enter PIN"
+              required
+              onChange={(e) => {
+                setQuery(e.target.value);
+              }}
+            />
           )}
           <Button type="submit" variant="primary" className="mt-3 btn-block">
             Search
@@ -46,7 +62,11 @@ function SearchForm() {
   return (
     <>
       <h2 className="searchForm__heading">Search for a medicine...</h2>
-      <Form>
+      <Form
+        onSubmit={(e) => {
+          handleSearch(e);
+        }}
+      >
         <ButtonGroup className="mt-3">
           {buttons.map((btn, idx) => (
             <Button
@@ -63,7 +83,11 @@ function SearchForm() {
             </Button>
           ))}
         </ButtonGroup>
-        <SearchMethod searchMode={btnSelect} />
+        <SearchMethod
+          searchMode={btnSelect}
+          setMedicineName={setMedicineName}
+          setQuery={setQuery}
+        />
       </Form>
     </>
   );

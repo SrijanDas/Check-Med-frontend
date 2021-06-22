@@ -1,8 +1,12 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
+import { format } from "timeago.js";
 
-function ShopCard({ inStock }) {
+function ShopCard({ cardData }) {
+  const shop = cardData.shop;
+  const inventory = cardData.inventory;
+  const inStock = cardData.inventory.quantity;
   const lowStock = inStock <= 10 ? true : false;
   const bg = lowStock ? "#DC3545" : "#198754";
   const header = lowStock ? "Only Few Left" : "In Stock";
@@ -15,9 +19,9 @@ function ShopCard({ inStock }) {
           {header}
         </Card.Header>
         <Card.Body>
-          <Card.Title>Ray Clinic</Card.Title>
+          <Card.Title>{shop.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
-            MB Road, Howrah-711104
+            {`${shop.address}, ${shop.state}, ${shop.district} - ${shop.pincode}`}
           </Card.Subtitle>
           <Card.Text style={{ color: statusColor, fontWeight: 500 }}>
             Qty: {inStock}
@@ -28,7 +32,7 @@ function ShopCard({ inStock }) {
           </Card.Link>
         </Card.Body>
         <Card.Footer className="text-muted">
-          Last Updated: 2 days ago
+          {`Last Updated: ${format(inventory.date)}`}
         </Card.Footer>
       </Card>
     </div>
