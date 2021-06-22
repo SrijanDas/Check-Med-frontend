@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Form from "react-bootstrap/Form";
-import { Typography } from "@material-ui/core";
+import "./SearchForm.css";
 
 function SearchForm() {
   const [btnSelect, setBtnSelect] = useState("1");
@@ -34,7 +35,7 @@ function SearchForm() {
           ) : (
             <Form.Control type="text" placeholder="Enter PIN" required />
           )}
-          <Button variant="primary" className="mt-3 btn-block">
+          <Button type="submit" variant="primary" className="mt-3 btn-block">
             Search
           </Button>
         </>
@@ -44,9 +45,7 @@ function SearchForm() {
 
   return (
     <>
-      <Typography align="center" variant="h5">
-        Search for a medicine...
-      </Typography>
+      <h2 className="searchForm__heading">Search for a medicine...</h2>
       <Form>
         <ButtonGroup className="mt-3">
           {buttons.map((btn, idx) => (

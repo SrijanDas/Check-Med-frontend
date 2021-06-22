@@ -9,6 +9,7 @@ import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 import { Link } from "react-router-dom";
 import useStyles from "./styles";
@@ -18,6 +19,7 @@ function SignUp() {
 
   return (
     <div>
+      <CssBaseline />
       <Container component="main" maxWidth="sm">
         <Paper elevation={3} className={classes.paper}>
           <Avatar className={classes.avatar}>

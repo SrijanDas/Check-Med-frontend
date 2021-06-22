@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 import { Link } from "react-router-dom";
 
@@ -40,6 +41,7 @@ function Login() {
 
   return (
     <div>
+      <CssBaseline />
       <Container component="main" maxWidth="xs">
         <Paper elevation={3} className={classes.paper}>
           <Avatar className={classes.avatar}>

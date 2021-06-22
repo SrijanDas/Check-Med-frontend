@@ -10,7 +10,6 @@ import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer/Footer";
 import Dashboard from "./pages/Dashboard/Dashboard";
 
-import CssBaseline from "@material-ui/core/CssBaseline";
 import useStyles from "./style";
 
 function App() {
@@ -22,7 +21,6 @@ function App() {
       <Navbar navbarBrand="CheckMeds" />
 
       <div className={classes.root}>
-        <CssBaseline />
         <Switch>
           <Route exact path="/">
             <Home />
