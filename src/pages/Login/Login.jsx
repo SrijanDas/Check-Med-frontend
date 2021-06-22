@@ -71,6 +71,9 @@ function Login() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            <Typography align="center">
+              <Link to="/">Forgot Password?</Link>
+            </Typography>
             <Button
               type="submit"
               fullWidth
@@ -82,9 +85,6 @@ function Login() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link to="/">Forgot password?</Link>
-              </Grid>
-              <Grid item>
                 <Link to="/sign-up">{"Don't have an account? Sign Up"}</Link>
               </Grid>
             </Grid>

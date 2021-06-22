@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Form from "react-bootstrap/Form";
+import { Typography } from "@material-ui/core";
 
 function SearchForm() {
   const [btnSelect, setBtnSelect] = useState("1");
@@ -12,9 +13,40 @@ function SearchForm() {
     { name: "Search by Map", value: "3" },
   ];
 
+  const SearchMethod = ({ searchMode }) => {
+    if (searchMode === "3") {
+      return (
+        <>
+          <h3>Coming Soon...</h3>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Form.Control
+            type="text"
+            className="mb-2"
+            placeholder="Enter medicine name"
+            required
+          />
+          {searchMode === "2" ? (
+            <Form.Control type="text" placeholder="Select District" required />
+          ) : (
+            <Form.Control type="text" placeholder="Enter PIN" required />
+          )}
+          <Button variant="primary" className="mt-3 btn-block">
+            Search
+          </Button>
+        </>
+      );
+    }
+  };
+
   return (
     <>
-      <h3 className="mt-4">Search for a medicine...</h3>
+      <Typography align="center" variant="h5">
+        Search for a medicine...
+      </Typography>
       <Form>
         <ButtonGroup className="mt-3">
           {buttons.map((btn, idx) => (
@@ -32,23 +64,7 @@ function SearchForm() {
             </Button>
           ))}
         </ButtonGroup>
-        <Form.Control
-          type="text"
-          className="mb-2"
-          placeholder="Enter medicine name"
-          required
-        />
-        {btnSelect === "1" ? (
-          <Form.Control type="text" placeholder="Enter PIN" required />
-        ) : btnSelect === "2" ? (
-          <Form.Control type="text" placeholder="Select District" required />
-        ) : (
-          <h3>Coming Soon...</h3>
-        )}
-
-        <Button variant="primary" className="mt-3 btn-block">
-          Search
-        </Button>
+        <SearchMethod searchMode={btnSelect} />
       </Form>
     </>
   );
