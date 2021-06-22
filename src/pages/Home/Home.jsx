@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Home.css";
-import ShopCard from "../../components/ShopCard";
+import ShopCard from "../../components/ShopCard/ShopCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";

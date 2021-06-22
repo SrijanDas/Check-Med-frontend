@@ -2,6 +2,7 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import { format } from "timeago.js";
+import "./ShopCard.css";
 
 function ShopCard({ cardData }) {
   const shop = cardData.shop;
@@ -14,7 +15,7 @@ function ShopCard({ cardData }) {
 
   return (
     <div>
-      <Card className="mt-4">
+      <Card className="shopCard mt-4 shadow bg-body rounded">
         <Card.Header style={{ backgroundColor: bg, color: "white" }}>
           {header}
         </Card.Header>
@@ -22,6 +23,9 @@ function ShopCard({ cardData }) {
           <Card.Title>{shop.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
             {`${shop.address}, ${shop.state}, ${shop.district} - ${shop.pincode}`}
+          </Card.Subtitle>
+          <Card.Subtitle className="mb-2 text-muted">
+            Contact: 12345678
           </Card.Subtitle>
           <Card.Text style={{ color: statusColor, fontWeight: 500 }}>
             Qty: {inStock}
