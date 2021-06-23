@@ -43,6 +43,7 @@ function Navbar(props) {
           to="/login"
           variant="contained"
           className="loginBtn"
+          disableElevation
         >
           Shop Login
         </Button>
