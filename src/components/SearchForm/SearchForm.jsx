@@ -51,6 +51,8 @@ function SearchForm({ setCards, setShowHeader }) {
         medicine_name: medicineName.toLowerCase(),
       };
     }
+    setQuery("");
+    setMedicineName("");
     try {
       const response = await axios.post("/search", formData);
       setShowHeader(true);
@@ -59,7 +61,7 @@ function SearchForm({ setCards, setShowHeader }) {
       clearStates();
       toast.error("Something went wrong! 😟", {
         position: toast.POSITION.BOTTOM_LEFT,
-        autoClose: 3000,
+        autoClose: 5000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -100,7 +102,8 @@ function SearchForm({ setCards, setShowHeader }) {
             className="mb-3"
             placeholder="Enter medicine name"
             required
-            onChangeCapture={(e) => {
+            value={medicineName}
+            onChange={(e) => {
               setMedicineName(e.target.value);
             }}
             autoFocus
@@ -147,9 +150,10 @@ function SearchForm({ setCards, setShowHeader }) {
           ) : (
             <Form.Control
               type="number"
+              value={query}
               placeholder="Enter PIN"
               required
-              onChangeCapture={(e) => {
+              onChange={(e) => {
                 setQuery(e.target.value);
               }}
             />
