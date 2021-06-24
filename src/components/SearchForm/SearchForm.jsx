@@ -3,6 +3,7 @@ import axios from "../../helpers/axios";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Spinner from "react-bootstrap/Spinner";
 import TextField from "@material-ui/core/TextField";
 import { districts, stateNames } from "../../dummyData";
 import { ToastContainer, toast } from "react-toastify";
@@ -15,6 +16,7 @@ function SearchForm({ setCards, setShowHeader }) {
   const [stateName, setStateName] = useState("West Bengal");
   const [district, setDistrict] = useState("Howrah");
   const [btnSelect, setBtnSelect] = useState("1");
+  const [isLoading, setIsLoading] = useState(false);
 
   const buttons = [
     { name: "Search by PIN", value: "1" },
@@ -37,6 +39,7 @@ function SearchForm({ setCards, setShowHeader }) {
 
   const handleSearch = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     let formData = {};
     if (btnSelect === "1") {
       formData = {
@@ -69,6 +72,7 @@ function SearchForm({ setCards, setShowHeader }) {
         progress: undefined,
       });
     }
+    setIsLoading(false);
   };
 
   return (
@@ -159,8 +163,17 @@ function SearchForm({ setCards, setShowHeader }) {
             />
           )}
 
-          <Button type="submit" variant="primary" className="btn-block my-3">
-            Search
+          <Button
+            type="submit"
+            variant="primary"
+            className="btn-block my-3"
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <Spinner animation="border" size="sm" variant="light" />
+            ) : (
+              "Search"
+            )}
           </Button>
         </Form>
       )}
