@@ -63,7 +63,7 @@ function SearchForm({ setCards, setShowHeader }) {
     } catch (error) {
       clearStates();
       toast.error("Something went wrong! 😟", {
-        position: toast.POSITION.BOTTOM_LEFT,
+        position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: true,
         closeOnClick: true,
@@ -178,7 +178,7 @@ function SearchForm({ setCards, setShowHeader }) {
         </Form>
       )}
 
-      <ToastContainer />
+      <ToastContainer className="ml-3 mb-3" />
     </>
   );
 }
