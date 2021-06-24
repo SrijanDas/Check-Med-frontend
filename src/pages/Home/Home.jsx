@@ -13,7 +13,7 @@ function Home() {
   const [showHeader, setShowHeader] = useState(false);
 
   return (
-    <div className="homePage">
+    <div className="homePage ">
       <Container fluid="sm">
         <Row>
           <Col md={{ span: 10, offset: 1 }}>

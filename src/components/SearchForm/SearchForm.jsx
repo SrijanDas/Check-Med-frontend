@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import axios from "../../helpers/axios";
 import Form from "react-bootstrap/Form";
-import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import SentimentDissatisfiedIcon from "@material-ui/icons/SentimentDissatisfied";
 import TextField from "@material-ui/core/TextField";
 import { districts, stateNames } from "../../dummyData";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./SearchForm.css";
 
 function SearchForm({ setCards, setShowHeader }) {
   const [medicineName, setMedicineName] = useState("");
   const [query, setQuery] = useState("");
-  const [errors, setErrors] = useState([]);
   const [stateName, setStateName] = useState("West Bengal");
   const [district, setDistrict] = useState("Howrah");
   const [btnSelect, setBtnSelect] = useState("1");
@@ -32,7 +32,6 @@ function SearchForm({ setCards, setShowHeader }) {
 
   const clearStates = () => {
     setCards([]);
-    setErrors([]);
     setShowHeader(false);
   };
 
@@ -56,11 +55,17 @@ function SearchForm({ setCards, setShowHeader }) {
       const response = await axios.post("/search", formData);
       setShowHeader(true);
       setCards(response.data);
-      setErrors([]);
     } catch (error) {
-      setCards([]);
-      setShowHeader(false);
-      setErrors([...errors, error]);
+      clearStates();
+      toast.error("Something went wrong! 😟", {
+        position: toast.POSITION.BOTTOM_LEFT,
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
@@ -89,7 +94,7 @@ function SearchForm({ setCards, setShowHeader }) {
       {btnSelect === "3" ? (
         <h3>Coming Soon...</h3>
       ) : (
-        <Form className="" onSubmit={handleSearch}>
+        <Form onSubmit={handleSearch}>
           <Form.Control
             type="text"
             className="mb-3"
@@ -156,32 +161,7 @@ function SearchForm({ setCards, setShowHeader }) {
         </Form>
       )}
 
-      {/* if errors */}
-      {errors.length
-        ? errors.map((err, indx) => (
-            <Alert
-              show={true}
-              key={indx}
-              variant="danger"
-              onClose={() => {
-                console.log(errors);
-                let temp = [...errors];
-                temp.splice(indx, 1);
-                setErrors(temp);
-              }}
-              dismissible
-              className="my-4"
-            >
-              <Alert.Heading>
-                Something went wrong!{" "}
-                <SentimentDissatisfiedIcon fontSize="large" />
-              </Alert.Heading>
-              <p>
-                {err.response.status} {err.response.statusText}
-              </p>
-            </Alert>
-          ))
-        : ""}
+      <ToastContainer />
     </>
   );
 }
