@@ -45,7 +45,25 @@ function Navbar(props) {
           className="loginBtn"
           disableElevation
         >
-          Shop Login
+          Dashboard
+        </Button>
+        <Button
+          component={Link}
+          to="/login"
+          variant="contained"
+          className="loginBtn ml-2"
+          disableElevation
+        >
+          Login
+        </Button>
+        <Button
+          component={Link}
+          to="/logout"
+          variant="contained"
+          className="loginBtn ml-2"
+          disableElevation
+        >
+          Logout
         </Button>
       </div>
     </div>

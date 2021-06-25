@@ -15,7 +15,7 @@ function ShopCard({ cardData }) {
 
   return (
     <div>
-      <Card className="shopCard mt-4 shadow bg-body rounded">
+      <Card className="shopCard mt-4 rounded">
         <Card.Header style={{ backgroundColor: bg, color: "white" }}>
           {header}
         </Card.Header>

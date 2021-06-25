@@ -34,6 +34,7 @@
 
 .dashboard__card.inventory.active {
   border-color: #1976d2;
+  box-shadow: none !important;
 }
 
 .dashboard__card.sales .dashboard__cardInfo {
@@ -41,6 +42,7 @@
 }
 .dashboard__card.sales.active {
   border-color: #f50057;
+  box-shadow: none !important;
 }
 .dashboard__card.reports .dashboard__cardInfo {
   color: #f57c00;
@@ -48,6 +50,7 @@
 .dashboard__card.reports.active {
   /* background-color: #fff3e0; */
   border-color: #f57c00;
+  box-shadow: none !important;
 }
 /* 
 @media (max-width: 990px) {

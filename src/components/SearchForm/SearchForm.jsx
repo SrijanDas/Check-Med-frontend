@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Spinner from "react-bootstrap/Spinner";
 import TextField from "@material-ui/core/TextField";
-import { districts, stateNames } from "../../dummyData";
+import { districts, stateNames } from "../../helpers/dummyData";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./SearchForm.css";
