@@ -1,50 +1,48 @@
-import * as actionTypes from "../actions/actionType";
-import { updateObject } from "../utils";
+import * as actionTypes from "../actions/authActionType";
 
 const initialState = {
-  token: null,
+  access: localStorage.getItem("access"),
+  refresh: localStorage.getItem("refresh"),
+  isFetching: false,
+  isAuthenticated: false,
+  user: null,
   error: null,
-  loading: false,
-};
-
-const authStart = (state, action) => {
-  return updateObject(state, {
-    error: null,
-    loading: true,
-  });
-};
-
-const authSuccess = (state, action) => {
-  return updateObject(state, {
-    token: action.token,
-    error: null,
-    loading: false,
-  });
-};
-
-const authFail = (state, action) => {
-  return updateObject(state, {
-    error: action.error,
-    loading: false,
-  });
-};
-
-const authLogout = (state, action) => {
-  return updateObject(state, {
-    token: null,
-  });
 };
 
 const authReducer = (state = initialState, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+
+  switch (type) {
     case actionTypes.AUTH_START:
-      return authStart(state, action);
+      return {
+        ...state,
+        isFetching: true,
+      };
     case actionTypes.AUTH_SUCCESS:
-      return authSuccess(state, action);
+      return {
+        ...state,
+        access: payload.access,
+        refresh: payload.refresh,
+        isAuthenticated: true,
+        isFetching: false,
+      };
     case actionTypes.AUTH_FAIL:
-      return authFail(state, action);
+      return {
+        ...state,
+        isFetching: false,
+        error: payload.error,
+      };
     case actionTypes.AUTH_LOGOUT:
-      return authLogout(state, action);
+      localStorage.removeItem("access");
+      localStorage.removeItem("refresh");
+      return {
+        ...state,
+        access: null,
+        refresh: null,
+        isAuthenticated: false,
+        user: null,
+      };
+
     default:
       return state;
   }

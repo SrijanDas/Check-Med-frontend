@@ -12,20 +12,32 @@ import PermPhoneMsgIcon from "@material-ui/icons/PermPhoneMsg";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import HomeIcon from "@material-ui/icons/Home";
 import PublishIcon from "@material-ui/icons/Publish";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
 
 function Sidebar({ toggleDrawer }) {
+  const isAuthenticated = false;
   return (
     <div role="presentation" onClick={toggleDrawer} onKeyDown={toggleDrawer}>
       <List>
-        {["Home", "Dashboard", "Upload Prescription"].map((text, index) => (
+        {[
+          "Home",
+          "Upload Prescription",
+          isAuthenticated ? "Dashboard" : "Login",
+        ].map((text, index) => (
           <ListItem component={Link} to={text.toLowerCase()} button key={text}>
             <ListItemIcon>
               {index === 0 ? (
                 <HomeIcon />
               ) : index === 1 ? (
-                <DashboardIcon />
-              ) : (
                 <PublishIcon />
+              ) : index === 2 ? (
+                isAuthenticated ? (
+                  <DashboardIcon />
+                ) : (
+                  <VpnKeyIcon />
+                )
+              ) : (
+                ""
               )}
             </ListItemIcon>
             <ListItemText primary={text} />
