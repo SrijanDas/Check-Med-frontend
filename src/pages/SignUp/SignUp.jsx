@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -10,12 +10,77 @@ import Paper from "@material-ui/core/Paper";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { licenseNumbers } from "../../helpers/dummyData";
+import { ToastContainer, toast } from "react-toastify";
 
 import { Link } from "react-router-dom";
 import useStyles from "./styles";
 
 function SignUp() {
   const classes = useStyles();
+
+  const [formData, setFormData] = useState({
+    licenseNumber: "",
+    email: "",
+    password1: "",
+    password2: "",
+  });
+  const [termsAccepted, setTermsAccepted] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { licenseNumber, password1, password2 } = formData;
+
+    const validLicense = licenseNumbers.find(
+      (element) => element === parseInt(licenseNumber)
+    );
+
+    if (validLicense) {
+      if (password1 === password2) {
+        if (termsAccepted) {
+          console.log("Valid Submitting form");
+        } else {
+          toast.error("Please accept the terms and conditions", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          return;
+        }
+      } else {
+        toast.error("The password and confirm password do not match", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        return;
+      }
+    } else {
+      toast.error("The license number is invalid.", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+  };
 
   return (
     <div>
@@ -28,44 +93,35 @@ function SignUp() {
           <Typography component="h1" variant="h5">
             Create New Account
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              label="Shop Name"
-              autoFocus
-              type="text"
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
+              name="licenseNumber"
               label="License Number"
               type="text"
+              onChange={handleChange}
             />
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              id="email"
               label="Email Address"
               name="email"
-              autoComplete="email"
+              onChange={handleChange}
             />
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              name="password"
+              name="password1"
               label="Password"
               type="password"
-              id="password"
-              autoComplete="current-password"
+              onChange={handleChange}
             />
             <TextField
               variant="outlined"
@@ -73,48 +129,19 @@ function SignUp() {
               required
               fullWidth
               name="password2"
-              label="Password Again"
+              label="Confirm Password"
               type="password"
-              id="password2"
-              autoComplete="current-password"
+              onChange={handleChange}
             />
 
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              label="Address"
-              type="text"
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              label="State"
-              type="text"
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              label="District"
-              type="text"
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              label="Pincode"
-              type="text"
-            />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="I accept the terms and conditions"
+              onChange={() => {
+                setTermsAccepted(!termsAccepted);
+              }}
             />
+
             <Button
               type="submit"
               fullWidth
@@ -130,6 +157,7 @@ function SignUp() {
           </form>
         </Paper>
       </Container>
+      <ToastContainer className="ml-3 mb-3" />
     </div>
   );
 }

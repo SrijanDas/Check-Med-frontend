@@ -38,15 +38,40 @@ function Navbar(props) {
       </div>
 
       <div className="navbar__rightBtns">
-        <Button
-          component={Link}
-          to="/login"
-          variant="contained"
-          className="loginBtn"
-          disableElevation
-        >
-          Shop Login
-        </Button>
+        {props.isAuthenticated ? (
+          <>
+            <Button
+              component={Link}
+              to="/dashboard"
+              variant="contained"
+              className="loginBtn"
+              disableElevation
+            >
+              Dashboard
+            </Button>
+
+            <Button
+              component={Link}
+              to="/logout"
+              variant="contained"
+              color="secondary"
+              className="logoutBtn"
+              disableElevation
+            >
+              Logout
+            </Button>
+          </>
+        ) : (
+          <Button
+            component={Link}
+            to="/login"
+            variant="contained"
+            className="loginBtn"
+            disableElevation
+          >
+            Login
+          </Button>
+        )}
       </div>
     </div>
   );
