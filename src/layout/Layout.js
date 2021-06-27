@@ -16,7 +16,7 @@ function Layout({ children }) {
   return (
     <div className={classes.root}>
       <ScrollToTop />
-      <Navbar />
+      <Navbar navbarBrand="CheckMeds" />
       {children}
       <Footer />
     </div>

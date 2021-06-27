@@ -15,3 +15,5 @@ export const districts = [
     label: "Kolkata",
   },
 ];
+
+export const licenseNumbers = [123, 124, 235, 564];

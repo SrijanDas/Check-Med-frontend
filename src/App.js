@@ -6,6 +6,7 @@ import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Logout from "./pages/Logout/Logout";
+import Activation from "./pages/Activation/Activation";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -35,6 +36,9 @@ function App() {
             </Route>
             <Route path="/sign-up">
               {isAuthenticated ? <Home /> : <SignUp />}
+            </Route>
+            <Route path="/activate/:uid/:token">
+              <Activation />
             </Route>
             <Route path="/dashboard">
               {isAuthenticated ? <Dashboard /> : <Login />}
