@@ -5,7 +5,6 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 
 import { districts, stateNames } from "../../helpers/dummyData";
 import { ToastContainer, toast } from "react-toastify";
@@ -117,6 +116,7 @@ function SearchForm({ setCards, setShowHeader }) {
             className="searchForm__medNameInput"
             placeholder="Search for medicines and other healthcare products..."
             fullWidth
+            variant="outlined"
             value={medicineName}
             onChange={(e) => {
               setMedicineName(e.target.value);
@@ -126,10 +126,9 @@ function SearchForm({ setCards, setShowHeader }) {
           />
 
           {btnSelect === "2" ? (
-            <>
+            <div className="searchForm__stateDistrictInputContainer">
               <TextField
-                className="mr-3"
-                id="outlined-select-currency-native"
+                className="searchForm__stateInput"
                 select
                 value={stateName}
                 onChange={handleStateNameChange}
@@ -138,6 +137,7 @@ function SearchForm({ setCards, setShowHeader }) {
                 }}
                 helperText="Please select your state"
                 variant="outlined"
+                fullWidth
               >
                 {stateNames.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -156,6 +156,7 @@ function SearchForm({ setCards, setShowHeader }) {
                 }}
                 helperText="Please select your district"
                 variant="outlined"
+                fullWidth
               >
                 {districts.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -163,7 +164,7 @@ function SearchForm({ setCards, setShowHeader }) {
                   </option>
                 ))}
               </TextField>
-            </>
+            </div>
           ) : (
             <TextField
               label="Pincode"
