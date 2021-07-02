@@ -84,7 +84,7 @@ function SearchForm({ setCards, setShowHeader }) {
         gutterBottom
         color="textSecondary"
       >
-        Check Availability of medicines and other healthcare products in your
+        Check availability of medicines and other healthcare products in your
         locality...
       </Typography>
 
