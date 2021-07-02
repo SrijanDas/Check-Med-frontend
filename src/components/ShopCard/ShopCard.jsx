@@ -14,7 +14,6 @@ function ShopCard({ cardData }) {
   const inStock = cardData.inventory.quantity;
   const lowStock = inStock <= 10 ? true : false;
   const header = lowStock ? "Only Few Left" : "In Stock";
-  const statusColor = lowStock ? "#DC3545" : "#198754";
 
   return (
     <>
