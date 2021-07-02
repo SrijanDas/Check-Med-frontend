@@ -1,7 +1,19 @@
-.searchForm__heading {
-  font-weight: 400;
-}
-
 .Toastify__toast-container {
   width: auto !important;
+}
+.searchForm__buttonsContainer {
+  margin: 20px 0px;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+.searchForm__buttonsContainer button {
+  text-transform: capitalize;
+}
+.searchForm__medNameInput {
+  margin-bottom: 20px !important;
+}
+
+.searchForm__stateInput {
+  margin-bottom: 15px !important;
 }

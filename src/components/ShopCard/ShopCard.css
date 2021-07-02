@@ -1,3 +1,29 @@
 .shopCard {
-  height: 20rem;
+  height: auto;
+  border: 3px solid #e8f5e9 !important;
+  margin-bottom: 1rem;
+}
+.shopCard.lowStock {
+  border: 3px solid #ffebee !important;
+}
+
+.shopCard__header {
+  color: #4caf50 !important;
+  background-color: #e8f5e9;
+}
+.shopCard__header.lowStock {
+  color: #f44336 !important;
+  background-color: #ffebee;
+}
+
+.quantity {
+  color: #4caf50;
+  font-weight: 600;
+}
+.quantity.lowstock {
+  color: #f44336;
+}
+
+.cardActions button {
+  text-transform: capitalize !important;
 }
