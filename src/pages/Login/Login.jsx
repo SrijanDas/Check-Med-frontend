@@ -23,7 +23,7 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-
+  console.log(dispatch);
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(email, password);

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "../../helpers/axios";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import Spinner from "react-bootstrap/Spinner";
+
+import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+
 import { districts, stateNames } from "../../helpers/dummyData";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -76,16 +78,24 @@ function SearchForm({ setCards, setShowHeader }) {
   };
 
   return (
-    <>
-      <h2 className="searchForm__heading">Search for a medicine...</h2>
+    <div>
+      <Typography
+        variant="h5"
+        align="center"
+        gutterBottom
+        color="textSecondary"
+      >
+        Check Availability of medicines and other healthcare products in your
+        locality...
+      </Typography>
 
-      {/* search method button */}
-      <ButtonGroup className="mt-3 mb-0">
+      {/* search by buttons */}
+      <div className="searchForm__buttonsContainer">
         {buttons.map((btn, idx) => (
           <Button
             key={idx}
-            className="mb-3"
-            variant={btnSelect === btn.value ? "primary" : "outline-secondary"}
+            color="primary"
+            variant={btnSelect === btn.value ? "contained" : "outlined"}
             onClick={() => {
               setBtnSelect(btn.value);
               clearStates();
@@ -94,24 +104,27 @@ function SearchForm({ setCards, setShowHeader }) {
             {btn.name}
           </Button>
         ))}
-      </ButtonGroup>
+      </div>
 
       {/* Search form */}
       {btnSelect === "3" ? (
-        <h3>Coming Soon...</h3>
+        <Typography variant="h4" align="center">
+          Coming Soon...
+        </Typography>
       ) : (
-        <Form onSubmit={handleSearch}>
-          <Form.Control
-            type="text"
-            className="mb-3"
-            placeholder="Enter medicine name"
-            required
+        <form onSubmit={handleSearch}>
+          <TextField
+            className="searchForm__medNameInput"
+            placeholder="Search for medicines and other healthcare products..."
+            fullWidth
             value={medicineName}
             onChange={(e) => {
               setMedicineName(e.target.value);
             }}
             autoFocus
+            required
           />
+
           {btnSelect === "2" ? (
             <>
               <TextField
@@ -152,7 +165,9 @@ function SearchForm({ setCards, setShowHeader }) {
               </TextField>
             </>
           ) : (
-            <Form.Control
+            <TextField
+              label="Pincode"
+              variant="outlined"
               type="number"
               value={query}
               placeholder="Enter PIN"
@@ -160,26 +175,28 @@ function SearchForm({ setCards, setShowHeader }) {
               onChange={(e) => {
                 setQuery(e.target.value);
               }}
+              fullWidth
             />
           )}
 
           <Button
             type="submit"
-            variant="primary"
+            color="primary"
             className="btn-block my-3"
             disabled={isLoading}
+            variant="contained"
           >
             {isLoading ? (
-              <Spinner animation="border" size="sm" variant="light" />
+              <CircularProgress color="inherit" size={25} />
             ) : (
               "Search"
             )}
           </Button>
-        </Form>
+        </form>
       )}
 
       <ToastContainer className="ml-3 mb-3" />
-    </>
+    </div>
   );
 }
 
