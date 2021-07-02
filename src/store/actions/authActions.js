@@ -1,32 +1,39 @@
 import * as actiontypes from "./authActionType";
 import axios from "../../helpers/axios";
 
-export const authStart = (userCredentials) => {
+export const loginStart = (userCredentials) => async (dispatch) => {
   return {
-    type: actiontypes.AUTH_START,
+    type: actiontypes.LOGIN_START,
   };
 };
 
 export const load_user = () => async (dispatch) => {
-  try {
-    const token = localStorage.getItem("access");
+  if (localStorage.getItem("access")) {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `JWT ${token}`,
+        Authorization: `JWT ${localStorage.getItem("access")}`,
         Accept: "application/json",
       },
     };
-    const res = await axios.get("/auth/users/me/", config);
 
+    try {
+      const res = await axios.get("/auth/users/me/", config);
+
+      dispatch({
+        type: actiontypes.USER_LOADED_SUCCESS,
+        payload: res.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: actiontypes.USER_LOADED_FAIL,
+        payload: error,
+      });
+    }
+  } else {
     dispatch({
-      type: actiontypes.AUTH_SUCCESS,
-      payload: res.data,
-    });
-  } catch (error) {
-    dispatch({
-      type: actiontypes.AUTH_FAIL,
-      payload: error,
+      type: actiontypes.USER_LOADED_FAIL,
+      payload: { error: "Not authorized" },
     });
   }
 };
@@ -46,14 +53,14 @@ export const login = (userCredentials) => async (dispatch) => {
     const res = await axios.post("/auth/jwt/create/", body, config);
 
     dispatch({
-      type: actiontypes.AUTH_SUCCESS,
+      type: actiontypes.LOGIN_SUCCESS,
       payload: res.data,
     });
 
     dispatch(load_user());
   } catch (error) {
     dispatch({
-      type: actiontypes.AUTH_FAIL,
+      type: actiontypes.LOGIN_FAIL,
       payload: error,
     });
   }
@@ -70,37 +77,41 @@ export const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("expirationDate");
   return {
-    type: actiontypes.AUTH_LOGOUT,
+    type: actiontypes.LOGOUT,
   };
 };
 
 export const checkAuthenticated = () => async (dispatch) => {
-  try {
-    const access = localStorage.getItem("access");
-
+  if (localStorage.getItem("access")) {
     const config = {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
     };
-    const body = JSON.stringify({ token: access });
-    const res = await axios.post("/auth/jwt/verify/", body, config);
-    if (res.data.code !== "token_not_valid") {
-      dispatch({
-        type: actiontypes.AUTH_SUCCESS,
-        payload: res.data,
-      });
-    } else {
+
+    const body = JSON.stringify({ token: localStorage.getItem("access") });
+
+    try {
+      const res = await axios.post("/auth/jwt/verify/", body, config);
+
+      if (res.data.code !== "token_not_valid") {
+        dispatch({
+          type: actiontypes.AUTH_SUCCESS,
+        });
+      } else {
+        dispatch({
+          type: actiontypes.AUTH_FAIL,
+        });
+      }
+    } catch (error) {
       dispatch({
         type: actiontypes.AUTH_FAIL,
-        error: "token not valid",
       });
     }
-  } catch (error) {
+  } else {
     dispatch({
       type: actiontypes.AUTH_FAIL,
-      payload: error,
     });
   }
 };

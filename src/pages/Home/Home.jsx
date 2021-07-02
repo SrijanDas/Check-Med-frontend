@@ -16,6 +16,7 @@ function Home() {
       <Container maxWidth="md">
         <div className="homepage__covidUpdatesBtnContainer">
           <Button
+            variant="outlined"
             size="large"
             startIcon={<ErrorOutlineIcon color="secondary" />}
             className="homepage__covidUpdatesBtn"
@@ -46,7 +47,7 @@ function Home() {
           )}
 
           {cards.map((cardData, indx) => (
-            <ShopCard cardData={cardData} />
+            <ShopCard key={indx} cardData={cardData} />
           ))}
         </div>
       </Container>

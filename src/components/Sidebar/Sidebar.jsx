@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
@@ -13,9 +12,11 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import HomeIcon from "@material-ui/icons/Home";
 import PublishIcon from "@material-ui/icons/Publish";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import { useSelector } from "react-redux";
 
 function Sidebar({ toggleDrawer }) {
-  const isAuthenticated = false;
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   return (
     <div role="presentation" onClick={toggleDrawer} onKeyDown={toggleDrawer}>
       <List>

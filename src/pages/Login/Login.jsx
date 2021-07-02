@@ -3,8 +3,6 @@ import "./Login.css";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
@@ -13,26 +11,25 @@ import Paper from "@material-ui/core/Paper";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import useStyles from "./loginStyles";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+
+import { useDispatch } from "react-redux";
+import { login } from "../../store/actions/authActions";
 
 function Login() {
   const classes = useStyles();
 
-  const authToken = useSelector((state) => state.auth.token);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-  console.log(dispatch);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    dispatch(login({ email: email, password: password }));
   };
 
-  console.log(authToken);
-
   return (
-    <div>
+    <div className="loginPage">
       <CssBaseline />
       <Container component="main" maxWidth="xs">
         <Paper elevation={3} className={classes.paper}>
@@ -67,11 +64,10 @@ function Login() {
                 setPassword(e.target.value);
               }}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Typography align="center">
+            <Typography
+              align="center"
+              className="loginPage__forgotPasswordLink"
+            >
               <Link to="/">Forgot Password?</Link>
             </Typography>
             <Button
