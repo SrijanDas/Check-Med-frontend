@@ -12,3 +12,19 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+.alertBox {
+  background-color: #fdecea;
+  color: #721e18;
+  padding: 20px;
+  margin-top: 1rem;
+}
+.homePage__shopCardsContainer {
+  margin-top: 2rem;
+}
+
+.homepage__covidUpdatesBtnContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
