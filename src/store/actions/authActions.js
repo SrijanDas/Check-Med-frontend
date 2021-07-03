@@ -1,12 +1,6 @@
 import * as actiontypes from "./authActionType";
 import axios from "../../helpers/axios";
 
-export const loginStart = (userCredentials) => async (dispatch) => {
-  return {
-    type: actiontypes.LOGIN_START,
-  };
-};
-
 export const load_user = () => async (dispatch) => {
   if (localStorage.getItem("access")) {
     const config = {
@@ -27,13 +21,11 @@ export const load_user = () => async (dispatch) => {
     } catch (error) {
       dispatch({
         type: actiontypes.USER_LOADED_FAIL,
-        payload: error,
       });
     }
   } else {
     dispatch({
       type: actiontypes.USER_LOADED_FAIL,
-      payload: { error: "Not authorized" },
     });
   }
 };
@@ -61,7 +53,6 @@ export const login = (userCredentials) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: actiontypes.LOGIN_FAIL,
-      payload: error,
     });
   }
 };
@@ -69,7 +60,6 @@ export const login = (userCredentials) => async (dispatch) => {
 export const authFail = (error) => {
   return {
     type: actiontypes.AUTH_FAIL,
-    payload: error,
   };
 };
 

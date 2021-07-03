@@ -11,10 +11,6 @@ const authReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case actionTypes.LOGIN_START:
-      return {
-        ...state,
-      };
     case actionTypes.LOGIN_SUCCESS:
       localStorage.setItem("access", payload.access);
       localStorage.setItem("refresh", payload.refresh);
