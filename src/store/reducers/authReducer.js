@@ -5,7 +5,6 @@ const initialState = {
   refresh: localStorage.getItem("refresh"),
   isAuthenticated: false,
   user: null,
-  error: null,
 };
 
 const authReducer = (state = initialState, action) => {

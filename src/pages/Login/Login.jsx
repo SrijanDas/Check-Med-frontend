@@ -43,6 +43,7 @@ function Login() {
             <TextField
               variant="outlined"
               margin="normal"
+              type="email"
               required
               fullWidth
               label="Email Address"
