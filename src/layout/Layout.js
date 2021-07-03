@@ -11,6 +11,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 function Layout({ children }) {
   const classes = useStyles();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const isLoading = useSelector((state) => state.loading.isLoading);
 
   const dispatch = useDispatch();
 
@@ -21,7 +22,7 @@ function Layout({ children }) {
 
   return (
     <div className={classes.root}>
-      <Backdrop className={classes.backdrop} open={false}>
+      <Backdrop className={classes.backdrop} open={isLoading}>
         <CircularProgress color="inherit" />
       </Backdrop>
       <ScrollToTop />

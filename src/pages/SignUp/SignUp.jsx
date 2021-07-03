@@ -15,9 +15,17 @@ import { ToastContainer, toast } from "react-toastify";
 
 import { Link } from "react-router-dom";
 import useStyles from "./styles";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loadingFail,
+  loadingStart,
+  loadingSuccess,
+} from "../../store/actions/loadingActions";
 
 function SignUp() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const error = useSelector((state) => state.loading.error);
 
   const [formData, setFormData] = useState({
     licenseNumber: "",
@@ -31,7 +39,8 @@ function SignUp() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    dispatch(loadingStart());
     e.preventDefault();
 
     const { licenseNumber, password1, password2 } = formData;
@@ -39,36 +48,8 @@ function SignUp() {
     const validLicense = licenseNumbers.find(
       (element) => element === parseInt(licenseNumber)
     );
-
-    if (validLicense) {
-      if (password1 === password2) {
-        if (termsAccepted) {
-          console.log("Valid Submitting form");
-        } else {
-          toast.error("Please accept the terms and conditions", {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          return;
-        }
-      } else {
-        toast.error("The password and confirm password do not match", {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        return;
-      }
-    } else {
+    if (!validLicense) {
+      dispatch(loadingFail());
       toast.error("The license number is invalid.", {
         position: "bottom-right",
         autoClose: 5000,
@@ -79,6 +60,51 @@ function SignUp() {
         progress: undefined,
       });
       return;
+    }
+    if (password1.length < 6) {
+      dispatch(loadingFail());
+      toast.error("Password must be 6 characters long", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    if (password1 !== password2) {
+      dispatch(loadingFail());
+
+      toast.error("The password and confirm password do not match", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    if (!termsAccepted) {
+      dispatch(loadingFail());
+      toast.error("Please accept the terms and conditions", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
+    if (!error) {
+      console.log("valid form ");
+      dispatch(loadingSuccess());
     }
   };
 
