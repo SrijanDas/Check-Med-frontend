@@ -1,0 +1,66 @@
+.dashboardTools {
+  width: auto;
+  height: calc(100vh - 40px);
+  background-color: rgb(251, 251, 255);
+  padding-left: 50px;
+  padding-right: 10px;
+}
+
+.dashboardToolsList {
+  list-style: none;
+  padding: 10px;
+}
+.dashboardToolsList__item {
+  padding: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.dashboardToolsList__itemIcon {
+  margin-right: 5px;
+}
+
+.dashboardToolsList__item.active,
+.dashboardToolsList__item:hover {
+  background-color: #e3f2fd;
+}
+.dashboardToolsList__item.active {
+  color: #1976d2;
+}
+
+.dashboardToolsList__itemTooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  margin-left: 40px;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .dashboardTools {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .dashboardToolsList__itemText {
+    display: none;
+  }
+  .dashboardToolsList__itemIcon {
+    margin-right: 0px;
+  }
+  .dashboardToolsList__item:hover .dashboardToolsList__itemTooltiptext {
+    visibility: visible;
+    opacity: 100;
+    transition: opacity 0.6s;
+  }
+}
