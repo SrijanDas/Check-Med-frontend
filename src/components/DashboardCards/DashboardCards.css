@@ -6,8 +6,8 @@
 
 .dashboard__card {
   border-radius: 5px !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
   cursor: pointer;
-
   width: 30%;
   border: 2px solid white;
 }
@@ -28,29 +28,41 @@
 .dashboard__cardFooter {
   color: #7a7a8f;
 }
+
 .dashboard__card.inventory .dashboard__cardInfo {
   color: #1976d2;
 }
 
 .dashboard__card.inventory.active {
+  border-color: #e3f2fd;
+  background-color: #e3f2fd;
+}
+
+.dashboard__card.inventory:hover {
   border-color: #1976d2;
-  box-shadow: none !important;
 }
 
 .dashboard__card.sales .dashboard__cardInfo {
   color: #f50057;
 }
 .dashboard__card.sales.active {
-  border-color: #f50057;
-  box-shadow: none !important;
+  border-color: #ffebee;
+  background-color: #ffebee;
 }
+.dashboard__card.sales:hover {
+  border-color: #f50057;
+}
+
 .dashboard__card.reports .dashboard__cardInfo {
   color: #f57c00;
 }
 .dashboard__card.reports.active {
-  /* background-color: #fff3e0; */
+  background-color: #fff3e0;
+  border-color: #fff3e0;
+}
+
+.dashboard__card.reports:hover {
   border-color: #f57c00;
-  box-shadow: none !important;
 }
 
 @media (max-width: 768px) {
@@ -59,7 +71,7 @@
     align-items: center;
   }
   .dashboard__card {
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
     width: 100% !important;
   }
 }
