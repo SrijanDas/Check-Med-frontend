@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import axios from "../../helpers/axios";
-
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-
 import { districts, stateNames } from "../../helpers/dummyData";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -77,7 +75,7 @@ function SearchForm({ setCards, setShowHeader }) {
   };
 
   return (
-    <div>
+    <div className="searchForm">
       <Typography
         variant="h5"
         align="center"
@@ -183,7 +181,7 @@ function SearchForm({ setCards, setShowHeader }) {
           <Button
             type="submit"
             color="primary"
-            className="btn-block my-3"
+            className="searchForm__searchBtn"
             disabled={isLoading}
             variant="contained"
           >
@@ -196,7 +194,7 @@ function SearchForm({ setCards, setShowHeader }) {
         </form>
       )}
 
-      <ToastContainer className="ml-3 mb-3" />
+      <ToastContainer className="toast" />
     </div>
   );
 }
