@@ -52,20 +52,14 @@
   border-color: #f57c00;
   box-shadow: none !important;
 }
-/* 
-@media (max-width: 990px) {
+
+@media (max-width: 768px) {
   .dashboard__cardsContainer {
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
   }
   .dashboard__card {
     margin-bottom: 1rem;
     width: 100% !important;
   }
 }
-
-@media (max-width: 1109px) {
-  .dashboard__card {
-    width: 15rem;
-  }
-} */

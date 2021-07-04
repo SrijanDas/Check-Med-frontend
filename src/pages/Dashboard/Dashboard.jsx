@@ -4,19 +4,17 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Inventory from "../../components/Inventory/Inventory";
 import DashboardCards from "../../components/DashboardCards/DashboardCards";
-import DashboardDrawer from "../../components/DashboardDrawer/DashboardDrawer";
-import Grid from "@material-ui/core/Grid";
+import DashboardTools from "../../components/DashboardTools/DashboardTools";
+
 function Dashboard() {
   const [active, setActive] = useState();
 
   return (
-    <div>
+    <>
       <Container maxWidth="lg">
-        <Grid container spacing={5}>
-          <Grid lg={2} md={2} sm={1} item>
-            <DashboardDrawer />
-          </Grid>
-          <Grid lg={10} md={9} sm={11} item>
+        <div className="dashboard">
+          <DashboardTools className="dashboard__tools" />
+          <div className="dashboard__content">
             <Typography
               className="my-4"
               align="center"
@@ -25,18 +23,14 @@ function Dashboard() {
             >
               Dashboard
             </Typography>
-            <DashboardCards
-              className="dashboard__cards"
-              active={active}
-              setActive={setActive}
-            />
-            <div className="dashboard__tools">
+            <DashboardCards active={active} setActive={setActive} />
+            <div className="dashboard__contentItem">
               {active === 0 ? <Inventory /> : ""}
             </div>
-          </Grid>
-        </Grid>
+          </div>
+        </div>
       </Container>
-    </div>
+    </>
   );
 }
 
