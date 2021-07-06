@@ -1,1 +1,6 @@
-
+.loginPage {
+  margin-bottom: 4rem;
+}
+.loginPage__forgotPasswordLink {
+  margin-top: 20px !important;
+}

@@ -32,3 +32,9 @@
   color: white !important;
   text-transform: capitalize !important;
 }
+.logoutBtn {
+  background-color: #dc004e !important;
+  color: white !important;
+  text-transform: capitalize !important;
+  margin-left: 10px !important;
+}

@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
@@ -12,20 +11,34 @@ import PermPhoneMsgIcon from "@material-ui/icons/PermPhoneMsg";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import HomeIcon from "@material-ui/icons/Home";
 import PublishIcon from "@material-ui/icons/Publish";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import { useSelector } from "react-redux";
 
 function Sidebar({ toggleDrawer }) {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   return (
     <div role="presentation" onClick={toggleDrawer} onKeyDown={toggleDrawer}>
       <List>
-        {["Home", "Dashboard", "Upload Prescription"].map((text, index) => (
+        {[
+          "Home",
+          "Upload Prescription",
+          isAuthenticated ? "Dashboard" : "Login",
+        ].map((text, index) => (
           <ListItem component={Link} to={text.toLowerCase()} button key={text}>
             <ListItemIcon>
               {index === 0 ? (
                 <HomeIcon />
               ) : index === 1 ? (
-                <DashboardIcon />
-              ) : (
                 <PublishIcon />
+              ) : index === 2 ? (
+                isAuthenticated ? (
+                  <DashboardIcon />
+                ) : (
+                  <VpnKeyIcon />
+                )
+              ) : (
+                ""
               )}
             </ListItemIcon>
             <ListItemText primary={text} />

@@ -1,48 +1,53 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
-import Navbar from "./components/Navbar/Navbar";
-import ScrollToTop from "./components/ScrollToTop";
-import Footer from "./components/Footer/Footer";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Logout from "./pages/Logout/Logout";
+import Activation from "./pages/Activation/Activation";
 
-import useStyles from "./style";
+import { useSelector } from "react-redux";
+import Layout from "./layout/Layout";
 
 function App() {
-  const classes = useStyles();
-
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   return (
     <Router>
-      <ScrollToTop />
-      <Navbar navbarBrand="CheckMeds" />
-
-      <div className={classes.root}>
+      <Layout>
         <Switch>
           <Route exact path="/">
             <Home />
           </Route>
           <Route path="/home">
-            <Home />
+            <Redirect to="/" />
           </Route>
           <Route path="/about">
             <About />
           </Route>
+          <Route path="/logout">
+            <Logout />
+          </Route>
           <Route path="/login">
-            <Login />
+            {isAuthenticated ? <Redirect to="/dashboard" /> : <Login />}
           </Route>
           <Route path="/sign-up">
-            <SignUp />
+            {isAuthenticated ? <Redirect to="/" /> : <SignUp />}
+          </Route>
+          <Route path="/activate/:uid/:token">
+            <Activation />
           </Route>
           <Route path="/dashboard">
-            <Dashboard />
+            {isAuthenticated ? <Dashboard /> : <Redirect to="/login" />}
           </Route>
         </Switch>
-      </div>
-      <Footer />
+      </Layout>
     </Router>
   );
 }
