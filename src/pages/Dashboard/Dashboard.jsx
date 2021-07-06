@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./Dashboard.css";
-import Typography from "@material-ui/core/Typography";
-import Inventory from "../../components/Inventory/Inventory";
 import DashboardCards from "../../components/DashboardCards/DashboardCards";
 import DashboardTools from "../../components/DashboardTools/DashboardTools";
+import Table from "../../components/Table/Table";
+import Chart from "../../components/Chart/Chart";
 
 function Dashboard() {
   const [active, setActive] = useState();
@@ -12,12 +12,20 @@ function Dashboard() {
     <div className="dashboard">
       <DashboardTools className="dashboard__tools" />
       <div className="dashboard__content">
-        <Typography className="my-4" align="center" gutterBottom variant="h5">
-          Dashboard
-        </Typography>
         <DashboardCards active={active} setActive={setActive} />
         <div className="dashboard__contentItem">
-          {active === 0 ? <Inventory /> : ""}
+          {active === 0 ? (
+            <Table active={active} />
+          ) : active === 1 ? (
+            <>
+              <Chart />
+              <Table active={active} />
+            </>
+          ) : active === 2 ? (
+            <Table active={active} />
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

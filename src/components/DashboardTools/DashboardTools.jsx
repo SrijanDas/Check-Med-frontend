@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import "./DashboardTools.css";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import LocalMallIcon from "@material-ui/icons/LocalMall";
-import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
+import StoreIcon from "@material-ui/icons/Store";
 import ReportIcon from "@material-ui/icons/Report";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-
+import BarChartIcon from "@material-ui/icons/BarChart";
 function DashboardTools() {
   const [active, setActive] = useState("Dashboard");
 
   const optionsList = [
     { icon: <DashboardIcon />, text: "Dashboard" },
-    { icon: <LocalMallIcon />, text: "Inventory" },
-    { icon: <MonetizationOnIcon />, text: "Sales" },
-    { icon: <ReportIcon />, text: "Reports" },
+    { icon: <StoreIcon />, text: "Shop Details" },
     { icon: <NotificationsIcon />, text: "Notifications" },
+    { icon: <ReportIcon />, text: "Reports" },
+    { icon: <BarChartIcon />, text: "Predict Sales" },
   ];
   return (
     <div>
@@ -22,6 +21,7 @@ function DashboardTools() {
         <ul className="dashboardToolsList">
           {optionsList.map((option, indx) => (
             <li
+              key={indx}
               onClick={() => {
                 setActive(option.text);
               }}
