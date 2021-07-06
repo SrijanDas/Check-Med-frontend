@@ -1,0 +1,7 @@
+.chartBtnGroup button {
+  border-radius: 20px !important;
+}
+.chartBtnGroup {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,44 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import MaterialTable from "material-table";
-import {
-  inventoryColumns,
-  inventoryData,
-  reportColumns,
-  reportData,
-} from "../../helpers/dummyData";
+import { inventoryColumns, inventoryData } from "../../helpers/dummyData";
 import "./Table.css";
 
 function Table(props) {
   const { active } = props;
-  const title =
-    active === 0
-      ? "Inventory"
-      : active === 1
-      ? "Sales"
-      : active === 2
-      ? "Reports"
-      : "";
+  const [data, setData] = useState(
+    active === 0 ? inventoryData : active === 1 ? inventoryData : null
+  );
+  const title = active === 0 ? "Inventory" : active === 1 ? "Sales" : "";
 
   const columns =
-    active === 0
-      ? inventoryColumns
-      : active === 1
-      ? inventoryColumns
-      : active === 2
-      ? reportColumns
-      : null;
-  const data =
-    active === 0
-      ? inventoryData
-      : active === 1
-      ? inventoryData
-      : active === 2
-      ? reportData
-      : null;
+    active === 0 ? inventoryColumns : active === 1 ? inventoryColumns : null;
 
   return (
     <div className="table">
-      <MaterialTable title={title} columns={columns} data={data} />
+      <MaterialTable
+        options={{
+          actionsColumnIndex: -1,
+        }}
+        title={title}
+        columns={columns}
+        data={data}
+        editable={{
+          onRowAdd: (newData) =>
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                setData([...data, newData]);
+
+                resolve();
+              }, 1000);
+            }),
+          onRowUpdate: (newData, oldData) =>
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                const dataUpdate = [...data];
+                const index = oldData.tableData.id;
+                dataUpdate[index] = newData;
+                setData([...dataUpdate]);
+
+                resolve();
+              }, 1000);
+            }),
+          onRowDelete: (oldData) =>
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                const dataDelete = [...data];
+                const index = oldData.tableData.id;
+                dataDelete.splice(index, 1);
+                setData([...dataDelete]);
+
+                resolve();
+              }, 1000);
+            }),
+        }}
+      />
     </div>
   );
 }

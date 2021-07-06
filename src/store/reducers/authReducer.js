@@ -3,7 +3,7 @@ import * as actionTypes from "../actions/authActionType";
 const initialState = {
   access: localStorage.getItem("access"),
   refresh: localStorage.getItem("refresh"),
-  isAuthenticated: false,
+  isAuthenticated: true,
   user: null,
 };
 

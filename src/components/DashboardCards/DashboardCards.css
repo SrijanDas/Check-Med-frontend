@@ -24,7 +24,7 @@
 }
 .dashboard__cardInfo h1 {
   font-weight: 500;
-  font-size: 2.2rem;
+  font-size: 2.3rem;
 }
 .dashboard__cardInfo p {
   margin-left: 1rem;
@@ -67,6 +67,10 @@
 
 .dashboard__card.reports:hover {
   border-color: #f57c00;
+}
+
+.dashboard__contentSales {
+  height: auto;
 }
 
 @media (max-width: 768px) {

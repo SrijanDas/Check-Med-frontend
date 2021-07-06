@@ -58,65 +58,59 @@ export const inventoryData = [
 
 export const reportColumns = [
   { title: "Report ID", field: "reportId" },
+  { title: "Action Taken", field: "actionTaken" },
   { title: "Status", field: "status" },
 ];
+
 export const reportData = [
   {
     reportId: "213jka213shf312",
-    status: "Resolved",
+    actionTaken: "Resolved",
+    status: "Accepted",
   },
 
   {
     reportId: "298gfha213shf312",
+    actionTaken: "Can't be solved",
     status: "Pending",
   },
   {
     reportId: "298gfha213shf312",
-    status: "Submitted",
+    actionTaken: "False report",
+    status: "Rejected",
   },
 ];
 
 export const chartData = [
   {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
+    name: "Jan",
+    sales: 4000,
   },
   {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
+    name: "Feb",
+    sales: 3000,
   },
   {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
+    name: "Mar",
+    sales: 5000,
+  },
+];
+
+export const topSellersData = [
+  {
+    name: "Paracetamol",
+    unitsSold: 200,
   },
   {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
+    name: "Ecord",
+    unitsSold: 50,
   },
   {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
+    name: "Aspirin",
+    unitsSold: 100,
   },
   {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
+    name: "Digin",
+    unitsSold: 400,
   },
 ];
