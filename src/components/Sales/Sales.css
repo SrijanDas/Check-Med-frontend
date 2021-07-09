@@ -1,0 +1,35 @@
+.sales__chart {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 2rem;
+}
+.sales__chartHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sales__barChart {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 2rem;
+}
+.sales__barChartHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 715px) {
+  .sales__chartHeader {
+    flex-direction: column;
+    margin-bottom: 1rem;
+    overflow: auto;
+  }
+  .sales__barChartHeader {
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+}

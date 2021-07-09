@@ -13,7 +13,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { licenseNumbers } from "../../helpers/dummyData";
 import { ToastContainer, toast } from "react-toastify";
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import useStyles from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -21,6 +21,7 @@ import {
   loadingStart,
   loadingSuccess,
 } from "../../store/actions/loadingActions";
+import { signup } from "../../store/actions/authActions";
 
 function SignUp() {
   const classes = useStyles();
@@ -34,6 +35,7 @@ function SignUp() {
     password2: "",
   });
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [accountCreated, setAccountCreated] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -43,7 +45,7 @@ function SignUp() {
     dispatch(loadingStart());
     e.preventDefault();
 
-    const { licenseNumber, password1, password2 } = formData;
+    const { licenseNumber, email, password1, password2 } = formData;
 
     const validLicense = licenseNumbers.find(
       (element) => element === parseInt(licenseNumber)
@@ -103,10 +105,20 @@ function SignUp() {
     }
 
     if (!error) {
-      console.log("valid form ");
-      dispatch(loadingSuccess());
+      const signUpData = {
+        email,
+        password: password1,
+        re_password: password2,
+      };
+      dispatch(signup(signUpData));
+      setAccountCreated(true);
     }
+    dispatch(loadingSuccess());
   };
+
+  if (accountCreated) {
+    return <Redirect to="/signup-success" />;
+  }
 
   return (
     <div>

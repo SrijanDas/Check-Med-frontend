@@ -3,7 +3,7 @@ import * as actionTypes from "../actions/authActionType";
 const initialState = {
   access: localStorage.getItem("access"),
   refresh: localStorage.getItem("refresh"),
-  isAuthenticated: true,
+  isAuthenticated: false,
   user: null,
 };
 
@@ -20,6 +20,8 @@ const authReducer = (state = initialState, action) => {
         access: payload.access,
         refresh: payload.refresh,
       };
+
+    case actionTypes.SIGNUP_FAIL:
     case actionTypes.LOGIN_FAIL:
     case actionTypes.LOGOUT:
       localStorage.removeItem("access");
@@ -32,6 +34,11 @@ const authReducer = (state = initialState, action) => {
         user: null,
       };
 
+    case actionTypes.SIGNUP_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: false,
+      };
     case actionTypes.USER_LOADED_SUCCESS:
       return {
         ...state,
@@ -52,6 +59,11 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: false,
+      };
+    case actionTypes.ACTIVATION_SUCCESS:
+    case actionTypes.ACTIVATION_FAIL:
+      return {
+        ...state,
       };
     default:
       return state;

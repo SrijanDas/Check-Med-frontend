@@ -2,7 +2,7 @@ import React from "react";
 import MaterialTable from "material-table";
 import { reportColumns, reportData } from "../../helpers/dummyData";
 
-function ReportsTable() {
+function Reports() {
   const title = "Reports";
   const data = reportData;
   const columns = reportColumns;
@@ -13,4 +13,4 @@ function ReportsTable() {
   );
 }
 
-export default ReportsTable;
+export default Reports;

@@ -16,39 +16,46 @@ import { useSelector } from "react-redux";
 
 function Sidebar({ toggleDrawer }) {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const listItems = [
+    { name: "Home", url: "/", icon: <HomeIcon /> },
+    {
+      name: "Upload Prescription",
+      url: "upload-prescription",
+      icon: <PublishIcon />,
+    },
+    {
+      name: isAuthenticated ? "Dashboard" : "Login",
+      url: isAuthenticated ? "dashboard" : "login",
+      icon: isAuthenticated ? <DashboardIcon /> : <VpnKeyIcon />,
+    },
+  ];
 
   return (
     <div role="presentation" onClick={toggleDrawer} onKeyDown={toggleDrawer}>
       <List>
-        {[
-          "Home",
-          "Upload Prescription",
-          isAuthenticated ? "Dashboard" : "Login",
-        ].map((text, index) => (
-          <ListItem component={Link} to={text.toLowerCase()} button key={text}>
-            <ListItemIcon>
-              {index === 0 ? (
-                <HomeIcon />
-              ) : index === 1 ? (
-                <PublishIcon />
-              ) : index === 2 ? (
-                isAuthenticated ? (
-                  <DashboardIcon />
-                ) : (
-                  <VpnKeyIcon />
-                )
-              ) : (
-                ""
-              )}
-            </ListItemIcon>
-            <ListItemText primary={text} />
+        {listItems.map((item, index) => (
+          <ListItem
+            component={Link}
+            to={item.url}
+            onClick={toggleDrawer(false)}
+            button
+            key={`${item}-${index}`}
+          >
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.name} />
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
         {["About", "Contact", "Feedback"].map((text, index) => (
-          <ListItem component={Link} to={text.toLowerCase()} button key={text}>
+          <ListItem
+            component={Link}
+            onClick={toggleDrawer(false)}
+            to={text.toLowerCase()}
+            button
+            key={text}
+          >
             <ListItemIcon>
               {index === 0 ? <InfoIcon /> : ""}
               {index === 1 ? <PermPhoneMsgIcon /> : ""}

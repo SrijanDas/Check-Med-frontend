@@ -64,18 +64,18 @@ export const reportColumns = [
 
 export const reportData = [
   {
-    reportId: "213jka213shf312",
+    reportId: "1",
     actionTaken: "Resolved",
     status: "Accepted",
   },
 
   {
-    reportId: "298gfha213shf312",
+    reportId: "2",
     actionTaken: "Can't be solved",
     status: "Pending",
   },
   {
-    reportId: "298gfha213shf312",
+    reportId: "3",
     actionTaken: "False report",
     status: "Rejected",
   },
