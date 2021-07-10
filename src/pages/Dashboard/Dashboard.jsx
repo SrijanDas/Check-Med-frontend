@@ -8,7 +8,6 @@ import Reports from "../../components/Reports/Reports";
 
 function Dashboard() {
   const [active, setActive] = useState();
-
   return (
     <div className="dashboard">
       <DashboardTools className="dashboard__tools" />

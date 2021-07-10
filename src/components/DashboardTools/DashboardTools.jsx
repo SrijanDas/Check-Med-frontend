@@ -35,7 +35,7 @@ function DashboardTools() {
               <span className="dashboardToolsList__itemText">
                 {option.text}
               </span>
-              <span class="dashboardToolsList__itemTooltiptext">
+              <span className="dashboardToolsList__itemTooltiptext">
                 {" "}
                 {option.text}
               </span>

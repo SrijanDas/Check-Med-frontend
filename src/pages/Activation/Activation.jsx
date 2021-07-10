@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { Link, useParams } from "react-router-dom";
 import "./Activation.css";
@@ -43,13 +43,15 @@ function Activation() {
   const [verified, setVerified] = useState(false);
   const { uid, token } = useParams();
   const dispatch = useDispatch();
+  const timer = useRef();
 
   const handleVerify = async () => {
     dispatch(loadingStart());
-    console.log(uid, token);
     dispatch(verify(uid, token));
-    setVerified(true);
-    dispatch(loadingSuccess());
+    timer.current = window.setTimeout(() => {
+      dispatch(loadingSuccess());
+      setVerified(true);
+    }, 2000);
   };
 
   return (

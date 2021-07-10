@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -16,17 +16,15 @@ import { ToastContainer, toast } from "react-toastify";
 import { Link, Redirect } from "react-router-dom";
 import useStyles from "./styles";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  loadingFail,
-  loadingStart,
-  loadingSuccess,
-} from "../../store/actions/loadingActions";
+import { loadingFail, loadingStart } from "../../store/actions/loadingActions";
 import { signup } from "../../store/actions/authActions";
 
 function SignUp() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const error = useSelector((state) => state.loading.error);
+
+  const timer = useRef();
 
   const [formData, setFormData] = useState({
     licenseNumber: "",
@@ -111,9 +109,11 @@ function SignUp() {
         re_password: password2,
       };
       dispatch(signup(signUpData));
-      setAccountCreated(true);
+
+      timer.current = window.setTimeout(() => {
+        setAccountCreated(true);
+      }, 2000);
     }
-    dispatch(loadingSuccess());
   };
 
   if (accountCreated) {
