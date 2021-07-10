@@ -12,6 +12,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Logout from "./pages/Logout/Logout";
 import Activation from "./pages/Activation/Activation";
+import Shop from "./pages/Shop/Shop";
 
 import { useSelector } from "react-redux";
 import Layout from "./layout/Layout";
@@ -36,7 +37,7 @@ function App() {
             <Logout />
           </Route>
           <Route path="/login">
-            {isAuthenticated ? <Redirect to="/dashboard" /> : <Login />}
+            {isAuthenticated ? <Redirect to="/shop" /> : <Login />}
           </Route>
           <Route path="/sign-up">
             {isAuthenticated ? <Redirect to="/login" /> : <SignUp />}
@@ -49,6 +50,9 @@ function App() {
           </Route>
           <Route path="/dashboard">
             {isAuthenticated ? <Dashboard /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/shop">
+            {isAuthenticated ? <Shop /> : <Redirect to="/login" />}
           </Route>
         </Switch>
       </Layout>

@@ -1,108 +1,118 @@
-import React from "react";
+import React, { useState, useRef } from "react";
+import "./ShopCreate.css";
+import {
+  Card,
+  CardContent,
+  CardActions,
+  Button,
+  Typography,
+  TextField,
+} from "@material-ui/core";
+import axios from "../../helpers/axios";
+import { useDispatch } from "react-redux";
+import {
+  loadingStart,
+  loadingSuccess,
+} from "../../store/actions/loadingActions";
 
-function ShopCreate() {
+function ShopCreate(props) {
+  const [formData, setFormData] = useState({
+    shopName: "",
+    address: "",
+    state: "",
+    district: "",
+    pin: "",
+  });
+  const dispatch = useDispatch();
+  const timer = useRef();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    dispatch(loadingStart());
+
+    try {
+      const res = await axios.post("/shop/create/", formData);
+      console.log(res.data);
+      props.setShop(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+
+    timer.current = setTimeout(() => {
+      dispatch(loadingSuccess());
+    }, 1000);
+  };
   return (
     <div>
-      <form className={classes.form} noValidate>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          label="Shop Name"
-          autoFocus
-          type="text"
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          label="License Number"
-          type="text"
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          autoComplete="email"
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          name="password2"
-          label="Password Again"
-          type="password"
-          id="password2"
-          autoComplete="current-password"
-        />
-
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          label="Address"
-          type="text"
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          label="State"
-          type="text"
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          label="District"
-          type="text"
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          label="Pincode"
-          type="text"
-        />
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="I accept the terms and conditions"
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-        >
-          Create Account
-        </Button>
-        <Grid container>
-          <Link to="/login">{"Already have an account? Log In"}</Link>
-        </Grid>
-      </form>
+      <Typography variant="h4" align="center" gutterBottom>
+        Let's setup your shop
+      </Typography>
+      <Card className="shopCreate__card">
+        <form className="shopCreate__form" onSubmit={handleSubmit}>
+          <CardContent>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="shopName"
+              label="Shop Name"
+              type="text"
+              onChange={handleChange}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              type="text"
+              required
+              fullWidth
+              label="Address"
+              name="address"
+              onChange={handleChange}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              type="text"
+              required
+              fullWidth
+              label="State"
+              name="state"
+              onChange={handleChange}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              type="text"
+              required
+              fullWidth
+              label="District"
+              name="district"
+              onChange={handleChange}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              type="number"
+              required
+              fullWidth
+              label="PIN Code"
+              name="pin"
+              onChange={handleChange}
+            />
+          </CardContent>
+          <CardActions className="shopCreate__cardActions">
+            <Button type="submit" variant="contained" color="primary">
+              Done
+            </Button>
+          </CardActions>
+        </form>
+      </Card>
     </div>
   );
 }
