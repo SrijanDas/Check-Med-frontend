@@ -15,6 +15,7 @@ import Activation from "./pages/Activation/Activation";
 
 import { useSelector } from "react-redux";
 import Layout from "./layout/Layout";
+import SignupSuccess from "./pages/SignupSuccess";
 
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -38,7 +39,10 @@ function App() {
             {isAuthenticated ? <Redirect to="/dashboard" /> : <Login />}
           </Route>
           <Route path="/sign-up">
-            {isAuthenticated ? <Redirect to="/" /> : <SignUp />}
+            {isAuthenticated ? <Redirect to="/login" /> : <SignUp />}
+          </Route>
+          <Route path="/signup-success">
+            {isAuthenticated ? <Redirect to="/login" /> : <SignupSuccess />}
           </Route>
           <Route path="/activate/:uid/:token">
             <Activation />
