@@ -16,7 +16,11 @@ import { ToastContainer, toast } from "react-toastify";
 import { Link, Redirect } from "react-router-dom";
 import useStyles from "./styles";
 import { useDispatch, useSelector } from "react-redux";
-import { loadingFail, loadingStart } from "../../store/actions/loadingActions";
+import {
+  loadingFail,
+  loadingStart,
+  loadingSuccess,
+} from "../../store/actions/loadingActions";
 import { signup } from "../../store/actions/authActions";
 
 function SignUp() {
@@ -111,6 +115,7 @@ function SignUp() {
       dispatch(signup(signUpData));
 
       timer.current = window.setTimeout(() => {
+        dispatch(loadingSuccess());
         setAccountCreated(true);
       }, 2000);
     }
