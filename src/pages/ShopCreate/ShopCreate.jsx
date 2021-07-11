@@ -8,17 +8,15 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
+import axios from "../../helpers/axios";
+import { useDispatch } from "react-redux";
 import {
   loadingStart,
   loadingSuccess,
 } from "../../store/actions/loadingActions";
 import { stateNames, districts } from "../../helpers/dummyData";
-import { createShop } from "../../store/actions/shopActions";
 
 function ShopCreate(props) {
-  const user = useSelector((state) => state.auth.user);
-
   const [formData, setFormData] = useState({
     shopName: "",
     address: "",
@@ -26,7 +24,6 @@ function ShopCreate(props) {
     district: "Howrah",
     pin: "",
   });
-
   const dispatch = useDispatch();
   const timer = useRef();
 
@@ -36,12 +33,27 @@ function ShopCreate(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     dispatch(loadingStart());
-    await dispatch(createShop(user, formData));
-    timer.current = setTimeout(() => {
-      dispatch(loadingSuccess());
-    }, 1000);
-    props.setShopCreated(true);
+    const body = {
+      user: props.userId,
+      name: formData.shopName,
+      address: formData.stateName,
+      state: formData.stateName,
+      district: formData.district,
+      pincode: formData.pin,
+    };
+
+    try {
+      const res = await axios.post("/shop/create/", body);
+      props.setShop(res.data);
+      timer.current = setTimeout(() => {
+        props.setShopCreated(true);
+        dispatch(loadingSuccess());
+      }, 1000);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./DashboardCards.css";
 import LocalMallIcon from "@material-ui/icons/LocalMall";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
@@ -8,6 +8,10 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
 function DashboardCards({ active, setActive }) {
+  const [inventoryValue, setInventoryValue] = useState("N/A");
+  const [salesTotal, setSalesTotal] = useState("N/A");
+  const [reportsCount, setReportsCount] = useState("N/A");
+
   return (
     <div className="dashboard__cardsContainer">
       <Card
@@ -22,7 +26,7 @@ function DashboardCards({ active, setActive }) {
             Inventory
           </span>
           <div className="dashboard__cardInfo">
-            <h1>₹​ 20k</h1>
+            <h1>₹​ {inventoryValue}</h1>
           </div>
           <span className="dashboard__cardFooter">
             Last Updated: 2 days ago
@@ -42,7 +46,7 @@ function DashboardCards({ active, setActive }) {
             Sales
           </span>
           <div className="dashboard__cardInfo">
-            <h1>₹​ 12k</h1>{" "}
+            <h1>₹​ {salesTotal} </h1>
             <p>
               -2.5% <ArrowDownwardIcon />
             </p>
@@ -63,7 +67,7 @@ function DashboardCards({ active, setActive }) {
             Reports
           </span>
           <div className="dashboard__cardInfo">
-            <h1>8</h1>
+            <h1>{reportsCount}</h1>
           </div>
           <span className="dashboard__cardFooter">6 resolved</span>
         </CardContent>

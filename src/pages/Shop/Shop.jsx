@@ -1,48 +1,71 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Shop.css";
-import { useSelector } from "react-redux";
-import { Card, CardContent, CardActions, Button } from "@material-ui/core";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  Card,
+  CardContent,
+  CardActions,
+  Button,
+  Container,
+} from "@material-ui/core";
 
-import axios from "../../helpers/axios";
-import { useState } from "react";
 import ShopCreate from "../../components/ShopCreate/ShopCreate";
+import {
+  loadingStart,
+  loadingSuccess,
+} from "../../store/actions/loadingActions";
+import { loadShop } from "../../store/actions/shopActions";
+import { useHistory } from "react-router-dom";
 
 function ShopDetails() {
   const user = useSelector((state) => state.auth.user);
-  const [shop, setShop] = useState({});
+  const shop = useSelector((state) => state.shop.shop);
+  const [shopCreated, setShopCreated] = useState(shop ? true : false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchStore = async () => {
+      dispatch(loadingStart());
       if (user) {
-        try {
-          const body = { userID: user.id };
-          const res = await axios.post("get-shop/", body);
-          setShop(res.data);
-        } catch (error) {
-          console.log(error);
-        }
+        dispatch(loadShop(user));
       }
+      dispatch(loadingSuccess());
     };
     fetchStore();
-  }, [user]);
+  }, [user, dispatch]);
+
+  const history = useHistory();
+
+  const routeChange = () => {
+    history.push("/dashboard");
+  };
 
   return (
     <div className="shop">
-      {shop.length ? (
-        <Card className="card">
-          <CardContent>
-            <h3 className="dashboard__shopName">Shop Name</h3>
-            <p>Contact No: 1234567</p>
-            <p>Address: NG Road, State, District, PIN-123</p>
-          </CardContent>
-          <CardActions>
-            <Button>Go to Dashboard</Button>
-            <Button>See Reports</Button>
-          </CardActions>
-        </Card>
-      ) : (
-        <ShopCreate setShop={setShop} />
-      )}
+      <Container className="shop__container" maxWidth="md">
+        {shopCreated ? (
+          <Card className="shop__card">
+            <CardContent>
+              <h3 className="dashboard__shopName">{shop.name}</h3>
+              <p>Contact No: 1234567</p>
+              <p>
+                Address: {shop.address}, {shop.state}, {shop.district}, PIN-
+                {shop.pincode}
+              </p>
+            </CardContent>
+            <CardActions className="shop__cardActions">
+              <Button onClick={routeChange} variant="contained" color="primary">
+                Go to Dashboard
+              </Button>
+              <Button variant="contained">Edit</Button>
+              <Button variant="contained">Delete</Button>
+            </CardActions>
+          </Card>
+        ) : (
+          <ShopCreate setShopCreated={setShopCreated} />
+        )}
+      </Container>
     </div>
   );
 }
