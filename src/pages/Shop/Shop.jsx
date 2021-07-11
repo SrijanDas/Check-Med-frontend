@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import "./Shop.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -20,8 +20,7 @@ import { useHistory } from "react-router-dom";
 function ShopDetails() {
   const user = useSelector((state) => state.auth.user);
   const shop = useSelector((state) => state.shop.shop);
-  const [shopCreated, setShopCreated] = useState(shop ? true : false);
-
+  const timer = useRef();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,9 +29,12 @@ function ShopDetails() {
       if (user) {
         dispatch(loadShop(user));
       }
-      dispatch(loadingSuccess());
     };
     fetchStore();
+
+    timer.current = setTimeout(() => {
+      dispatch(loadingSuccess());
+    }, 500);
   }, [user, dispatch]);
 
   const history = useHistory();
@@ -44,7 +46,7 @@ function ShopDetails() {
   return (
     <div className="shop">
       <Container className="shop__container" maxWidth="md">
-        {shopCreated ? (
+        {shop ? (
           <Card className="shop__card">
             <CardContent>
               <h3 className="dashboard__shopName">{shop.name}</h3>
@@ -63,7 +65,7 @@ function ShopDetails() {
             </CardActions>
           </Card>
         ) : (
-          <ShopCreate setShopCreated={setShopCreated} />
+          <ShopCreate />
         )}
       </Container>
     </div>

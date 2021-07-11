@@ -41,7 +41,7 @@ function ShopCreate(props) {
     timer.current = setTimeout(() => {
       dispatch(loadingSuccess());
     }, 1000);
-    props.setShopCreated(true);
+    window.location.reload();
   };
   return (
     <div>

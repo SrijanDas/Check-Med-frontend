@@ -29,6 +29,11 @@
 .dashboard__cardInfo p {
   margin-left: 1rem;
 }
+
+.dashboard__cardInfoPercentage {
+  margin-right: 10px !important;
+}
+
 .dashboard__cardFooter {
   color: #7a7a8f;
 }
@@ -46,17 +51,40 @@
   border-color: #1976d2;
 }
 
-.dashboard__card.sales .dashboard__cardInfo {
-  color: #f50057;
-}
 .dashboard__card.sales.active {
-  border-color: #ffebee;
-  background-color: #ffebee;
+  border-color: #e0e0e0;
+  background-color: #e0e0e0;
 }
+
 .dashboard__card.sales:hover {
+  border-color: #9e9e9e;
+}
+
+.dashboard__card.sales.positive .dashboard__cardInfo {
+  color: #4caf50;
+}
+
+.dashboard__card.sales.positive.active {
+  border-color: #e8f5e9;
+  background-color: #e8f5e9;
+}
+
+.dashboard__card.sales.positive:hover {
+  border-color: #4caf50;
+}
+
+.dashboard__card.sales.negative:hover {
   border-color: #f50057;
 }
 
+.dashboard__card.sales.negative.active {
+  border-color: #e0e0e0;
+  background-color: red;
+}
+
+.dashboard__card.sales.negative .dashboard__cardInfo {
+  color: #f50057;
+}
 .dashboard__card.reports .dashboard__cardInfo {
   color: #f57c00;
 }

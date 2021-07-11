@@ -13,10 +13,10 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Logout from "./pages/Logout/Logout";
 import Activation from "./pages/Activation/Activation";
 import Shop from "./pages/Shop/Shop";
+import SignupSuccess from "./pages/SignupSuccess";
+import Layout from "./layout/Layout";
 
 import { useSelector } from "react-redux";
-import Layout from "./layout/Layout";
-import SignupSuccess from "./pages/SignupSuccess";
 
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);

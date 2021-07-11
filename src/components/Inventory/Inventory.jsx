@@ -1,11 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Inventory.css";
 import MaterialTable from "material-table";
-import { inventoryData, inventoryColumns } from "../../helpers/dummyData";
+import { useSelector } from "react-redux";
+import axios from "../../helpers/axios";
 
 function Inventory() {
-  const [data, setData] = useState(inventoryData);
-  const columns = inventoryColumns;
+  const [data, setData] = useState();
+  console.log(data);
+  const shop = useSelector((state) => state.shop.shop);
+
+  useEffect(() => {
+    const getInventoryData = async () => {
+      try {
+        const res = await axios.get(`/inventory/${shop.id}`);
+        setData(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getInventoryData();
+  }, [shop]);
+
+  const columns = [
+    { title: "Medicine Name", field: "medicine.name" },
+    { title: "Qty", field: "quantity", type: "numeric" },
+    { title: "Price", field: "medicine.price", type: "numeric" },
+    {
+      title: "Total",
+      field: "total",
+      type: "numeric",
+    },
+    { title: "Last Updated", field: "date" },
+  ];
   return (
     <div className="inventory">
       <div className="inventory__table">
@@ -21,7 +47,6 @@ function Inventory() {
               new Promise((resolve, reject) => {
                 setTimeout(() => {
                   setData([...data, newData]);
-
                   resolve();
                 }, 1000);
               }),
