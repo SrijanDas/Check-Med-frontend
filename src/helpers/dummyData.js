@@ -81,7 +81,7 @@ export const reportData = [
   },
 ];
 
-export const chartData = [
+export const salesData = [
   {
     name: "Jan",
     sales: 4000,

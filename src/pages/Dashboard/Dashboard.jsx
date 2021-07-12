@@ -7,6 +7,7 @@ import Sales from "../../components/Sales/Sales";
 import Reports from "../../components/Reports/Reports";
 import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Container, Grid } from "@material-ui/core";
 
 function Dashboard() {
   const [active, setActive] = useState();
@@ -14,25 +15,30 @@ function Dashboard() {
   if (!shop) return <Redirect to="/shop" />;
 
   return (
-    <div className="dashboard">
-      <DashboardTools className="dashboard__tools" />
-
-      <div className="dashboard__right">
-        <div className="dashboard__rightCards">
-          <DashboardCards active={active} setActive={setActive} />
-        </div>
-        <div className="dashboard__rightContent">
-          {active === 0 ? (
-            <Inventory />
-          ) : active === 1 ? (
-            <Sales />
-          ) : active === 2 ? (
-            <Reports />
-          ) : (
-            ""
-          )}
-        </div>
-      </div>
+    <div className="dashboardContainer">
+      <Container className="dashboard" maxWidth="lg">
+        <Grid container spacing={2}>
+          <Grid item xs={2}>
+            <DashboardTools className="dashboard__tools" />
+          </Grid>
+          <Grid className="dashboard__right" item xs={10}>
+            <div className="dashboard__rightCards">
+              <DashboardCards active={active} setActive={setActive} />
+            </div>
+            <div className="dashboard__rightContent">
+              {active === 0 ? (
+                <Inventory />
+              ) : active === 1 ? (
+                <Sales />
+              ) : active === 2 ? (
+                <Reports />
+              ) : (
+                ""
+              )}
+            </div>
+          </Grid>
+        </Grid>
+      </Container>
     </div>
   );
 }

@@ -14,9 +14,11 @@ export const loadShop = (user) => async (dispatch) => {
       dispatch({
         type: shopActionTypes.SHOP_LOADED_FAIL,
       });
+      return;
     }
   } catch (error) {
     console.log(error);
+    return;
   }
 };
 
