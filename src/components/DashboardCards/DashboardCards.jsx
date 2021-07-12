@@ -1,13 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./DashboardCards.css";
 import LocalMallIcon from "@material-ui/icons/LocalMall";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ReportIcon from "@material-ui/icons/Report";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import axios from "../../helpers/axios";
+import { useSelector } from "react-redux";
+import { format } from "timeago.js";
+import numberFormatter from "../../helpers/numberFormatter";
 
 function DashboardCards({ active, setActive }) {
+  const { id } = useSelector((state) => state.shop.shop);
+
+  const [inventoryData, setInventoryData] = useState({});
+  const [salesData, setSalesData] = useState({});
+  const [reportsData, setReportsData] = useState({});
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const res = await axios.get(`/dashboard/${id}`);
+        setInventoryData(res.data.inventory);
+        setSalesData(res.data.sales);
+        setReportsData(res.data.reports);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchDashboardData();
+  }, [id]);
+
+  // dashboard/<int:shop_id>
+
   return (
     <div className="dashboard__cardsContainer">
       <Card
@@ -22,10 +49,13 @@ function DashboardCards({ active, setActive }) {
             Inventory
           </span>
           <div className="dashboard__cardInfo">
-            <h1>₹​ 20k</h1>
+            <h1>₹​ {numberFormatter(inventoryData.total)}</h1>
           </div>
           <span className="dashboard__cardFooter">
-            Last Updated: 2 days ago
+            Last Updated:{" "}
+            {inventoryData.updated === "N/A"
+              ? "N/A"
+              : format(inventoryData.updated)}
           </span>
         </CardContent>
       </Card>
@@ -34,7 +64,13 @@ function DashboardCards({ active, setActive }) {
         onClick={() => {
           setActive(1);
         }}
-        className={`dashboard__card sales ${active === 1 ? "active" : ""}`}
+        className={`dashboard__card sales ${
+          salesData.trend === "+"
+            ? "positive"
+            : salesData.trend === "-"
+            ? "negative"
+            : ""
+        } ${active === 1 ? "active" : ""}`}
       >
         <CardContent>
           <span className="dashboard__cardTitle">
@@ -42,10 +78,17 @@ function DashboardCards({ active, setActive }) {
             Sales
           </span>
           <div className="dashboard__cardInfo">
-            <h1>₹​ 12k</h1>{" "}
-            <p>
-              -2.5% <ArrowDownwardIcon />
+            <h1>₹​ {numberFormatter(salesData.total)} </h1>
+            <p className="dashboard__cardInfoPercentage">
+              {salesData.trend + salesData.percentage}
             </p>
+            {salesData.trend === "+" ? (
+              <ArrowUpwardIcon />
+            ) : salesData.trend === "-" ? (
+              <ArrowDownwardIcon />
+            ) : (
+              ""
+            )}
           </div>
           <span className="dashboard__cardFooter">Compared to last month</span>
         </CardContent>
@@ -63,9 +106,11 @@ function DashboardCards({ active, setActive }) {
             Reports
           </span>
           <div className="dashboard__cardInfo">
-            <h1>8</h1>
+            <h1>{reportsData.total}</h1>
           </div>
-          <span className="dashboard__cardFooter">6 resolved</span>
+          <span className="dashboard__cardFooter">
+            {reportsData.resolved} resolved
+          </span>
         </CardContent>
       </Card>
     </div>

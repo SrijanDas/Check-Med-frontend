@@ -57,12 +57,6 @@ export const login = (userCredentials) => async (dispatch) => {
   }
 };
 
-export const authFail = (error) => {
-  return {
-    type: actiontypes.AUTH_FAIL,
-  };
-};
-
 export const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("expirationDate");
@@ -102,6 +96,57 @@ export const checkAuthenticated = () => async (dispatch) => {
   } else {
     dispatch({
       type: actiontypes.AUTH_FAIL,
+    });
+  }
+};
+
+export const signup = (userCredentials) => async (dispatch) => {
+  const { email, password, re_password } = userCredentials;
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const body = { email, password, re_password };
+
+  try {
+    const res = await axios.post("/auth/users/", body, config);
+    dispatch({
+      type: actiontypes.SIGNUP_SUCCESS,
+      payload: res.data,
+    });
+
+    dispatch(load_user());
+  } catch (error) {
+    dispatch({
+      type: actiontypes.SIGNUP_FAIL,
+    });
+  }
+};
+
+export const verify = (uid, token) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const body = { uid, token };
+
+  try {
+    const res = await axios.post("/auth/users/activation/", body, config);
+
+    dispatch({
+      type: actiontypes.ACTIVATION_SUCCESS,
+      payload: res.data,
+    });
+
+    dispatch(load_user());
+  } catch (error) {
+    dispatch({
+      type: actiontypes.ACTIVATION_FAIL,
     });
   }
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./Login.css";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -14,18 +14,26 @@ import { Link } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import { login } from "../../store/actions/authActions";
+import {
+  loadingStart,
+  loadingSuccess,
+} from "../../store/actions/loadingActions";
 
 function Login() {
   const classes = useStyles();
-
+  const timer = useRef();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(login({ email: email, password: password }));
+    dispatch(loadingStart());
+    timer.current = window.setTimeout(() => {
+      dispatch(login({ email: email, password: password }));
+      dispatch(loadingSuccess());
+    }, 1000);
   };
 
   return (

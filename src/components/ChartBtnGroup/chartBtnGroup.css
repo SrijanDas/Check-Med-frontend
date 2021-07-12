@@ -1,0 +1,12 @@
+.chartBtnGroup button {
+  border-radius: 20px !important;
+  width: auto !important;
+}
+
+.chartBtnGroup button.active {
+  background-color: #e3f2fd !important;
+}
+
+.chartBtnGroup {
+  display: flex;
+}
