@@ -3,8 +3,8 @@ import "./Sales.css";
 import {
   BarChart,
   Bar,
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -14,11 +14,26 @@ import {
 import { salesData, topSellersData } from "../../helpers/dummyData";
 import ChartBtnGroup from "../ChartBtnGroup/ChartBtnGroup";
 import MaterialTable from "material-table";
+import numberFormatter from "../../helpers/numberFormatter";
 
 function Sales() {
   const chartData = salesData;
   const barChartData = topSellersData;
-  const columns = [];
+  const columns = [
+    {
+      title: "Order Id",
+      // field: "medicine.name",
+      align: "left",
+    },
+    {
+      title: "Total",
+      align: "left",
+    },
+    {
+      title: "DateTime",
+      align: "left",
+    },
+  ];
   const [data, setData] = useState([]);
 
   return (
@@ -29,13 +44,28 @@ function Sales() {
           <ChartBtnGroup />
         </div>
         <ResponsiveContainer width="100%" aspect={4 / 1}>
-          <LineChart data={chartData}>
-            <Line type="monotone" dataKey="sales" stroke="#5550bd" />
-            <XAxis dataKey="name" stroke="#5550bd" />
-            <YAxis />
+          <AreaChart data={chartData}>
+            <defs>
+              <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#2B81D6" stopOpacity={0.4} />
+                <stop offset="75%" stopColor="#2B81D6" stopOpacity={0.05} />
+              </linearGradient>
+            </defs>
+            <Area
+              dataKey="sales"
+              stroke="#2B81D6"
+              fill="url(#color)"
+              // dot={{ stroke: "#44c0ff", strokeWidth: 4, r: 2, fill: "blue" }}
+            />
+            <XAxis dataKey="name" />
+            <YAxis
+              dataKey="sales"
+              tickLine={false}
+              tickFormatter={(number) => `${numberFormatter(number)}`}
+            />
             <Tooltip />
-            <CartesianGrid stroke="#e0dfdf" strokeDasharray="5 5" />
-          </LineChart>
+            <CartesianGrid opacity={0.3} vertical={false} />
+          </AreaChart>
         </ResponsiveContainer>
       </div>
       <div className="sales__barChart">
@@ -47,8 +77,8 @@ function Sales() {
           <BarChart width={500} height={300} data={barChartData}>
             <XAxis dataKey="name" />
             <YAxis />
-            <Tooltip />
-            <Bar dataKey="unitsSold" fill="#5550bd" />
+            <Tooltip cursor={false} />
+            <Bar dataKey="unitsSold" fill="#2B81D6" />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -62,7 +92,7 @@ function Sales() {
               color: "#1976D2",
             },
           }}
-          title="Inventory"
+          title="Recent Orders"
           columns={columns}
           data={data}
           actions={[

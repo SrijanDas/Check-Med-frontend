@@ -6,7 +6,6 @@ import axios from "../../helpers/axios";
 
 function Inventory() {
   const [data, setData] = useState();
-  console.log(data);
   const shop = useSelector((state) => state.shop.shop);
 
   useEffect(() => {
@@ -14,9 +13,7 @@ function Inventory() {
       try {
         const res = await axios.get(`/inventory/${shop.id}`);
         setData(res.data);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     };
     getInventoryData();
   }, [shop]);
