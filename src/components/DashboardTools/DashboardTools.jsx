@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./DashboardTools.css";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import StoreIcon from "@material-ui/icons/Store";
@@ -6,21 +6,8 @@ import ReportIcon from "@material-ui/icons/Report";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 // import BarChartIcon from "@material-ui/icons/BarChart";
 import ListAltIcon from "@material-ui/icons/ListAlt";
-import { Redirect } from "react-router";
 
-function DashboardTools({ page }) {
-  const [active, setActive] = useState(page);
-
-  if (active === 1) {
-    return <Redirect to="/shop" />;
-  } else if (active === 2) {
-    return <Redirect to="/orders" />;
-  } else if (active === 3) {
-    return <Redirect to="/notifications" />;
-  } else if (active === 4) {
-    return <Redirect to="/reports" />;
-  }
-
+function DashboardTools({ page, setPage }) {
   const optionsList = [
     { icon: <DashboardIcon />, text: "Dashboard", id: 0 },
     { icon: <StoreIcon />, text: "Shop Details", id: 1 },
@@ -37,10 +24,10 @@ function DashboardTools({ page }) {
             <li
               key={indx}
               onClick={() => {
-                setActive(option.id);
+                setPage(option.id);
               }}
               className={`dashboardToolsList__item ${
-                active === option.id ? "active" : ""
+                page === option.id ? "active" : ""
               }`}
             >
               <span className="dashboardToolsList__itemIcon">
