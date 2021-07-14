@@ -1,17 +1,13 @@
-.dashboard {
-  display: flex;
+.dashboardContainer {
+  background: linear-gradient(90deg, #fbfbff 50%, white 50%);
 }
 .dashboard__tools {
   width: 20%;
 }
 
 .dashboard__right {
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-  /* padding: 20px; */
+  margin-top: 1rem !important;
+  background-color: white;
 }
 .dashboard__rightCards {
   width: 100%;

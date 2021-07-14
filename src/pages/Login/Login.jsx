@@ -11,6 +11,7 @@ import Paper from "@material-ui/core/Paper";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import useStyles from "./loginStyles";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import { useDispatch } from "react-redux";
 import { login } from "../../store/actions/authActions";
@@ -33,7 +34,7 @@ function Login() {
     timer.current = window.setTimeout(() => {
       dispatch(login({ email: email, password: password }));
       dispatch(loadingSuccess());
-    }, 1000);
+    }, 300);
   };
 
   return (
@@ -97,6 +98,7 @@ function Login() {
           </form>
         </Paper>
       </Container>
+      <ToastContainer className="" />
     </div>
   );
 }

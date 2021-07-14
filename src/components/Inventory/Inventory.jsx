@@ -6,7 +6,6 @@ import axios from "../../helpers/axios";
 
 function Inventory() {
   const [data, setData] = useState();
-  console.log(data);
   const shop = useSelector((state) => state.shop.shop);
 
   useEffect(() => {
@@ -14,34 +13,51 @@ function Inventory() {
       try {
         const res = await axios.get(`/inventory/${shop.id}`);
         setData(res.data);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     };
     getInventoryData();
   }, [shop]);
 
   const columns = [
-    { title: "Medicine Name", field: "medicine.name" },
-    { title: "Qty", field: "quantity", type: "numeric" },
-    { title: "Price", field: "medicine.price", type: "numeric" },
+    {
+      title: "Medicine Name",
+      field: "medicine.name",
+      align: "left",
+    },
+    { title: "Qty", field: "quantity", type: "numeric", align: "left" },
+    { title: "Price", field: "medicine.price", type: "numeric", align: "left" },
     {
       title: "Total",
       field: "total",
       type: "numeric",
+      editable: "never",
+      align: "left",
     },
-    { title: "Last Updated", field: "date" },
+    { title: "Last Updated", field: "date", editable: "never" },
   ];
   return (
-    <div className="inventory">
+    <div className="inventory__tableContainer">
       <div className="inventory__table">
         <MaterialTable
           options={{
             actionsColumnIndex: -1,
+            addRowPosition: "first",
+            selection: true,
+            headerStyle: {
+              color: "#1976D2",
+            },
           }}
           title="Inventory"
           columns={columns}
           data={data}
+          actions={[
+            {
+              tooltip: "Remove All Selected Users",
+              icon: "delete",
+              onClick: (evt, data) =>
+                alert("You want to delete " + data.length + " rows"),
+            },
+          ]}
           editable={{
             onRowAdd: (newData) =>
               new Promise((resolve, reject) => {

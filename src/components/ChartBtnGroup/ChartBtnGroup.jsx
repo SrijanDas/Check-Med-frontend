@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./chartBtnGroup.css";
 
 function ChartBtnGroup() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(4);
   const btnList = [
     { id: 0, name: "1d" },
     { id: 1, name: "1w" },

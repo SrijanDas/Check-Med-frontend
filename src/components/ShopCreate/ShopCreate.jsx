@@ -85,6 +85,7 @@ function ShopCreate(props) {
               }}
               variant="outlined"
               fullWidth
+              margin="normal"
               name="stateName"
             >
               {stateNames.map((option) => (

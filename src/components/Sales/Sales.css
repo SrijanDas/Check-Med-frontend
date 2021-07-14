@@ -22,7 +22,7 @@
   justify-content: space-between;
 }
 
-@media (max-width: 715px) {
+/* @media (max-width: 715px) {
   .sales__chartHeader {
     flex-direction: column;
     margin-bottom: 1rem;
@@ -32,4 +32,4 @@
     flex-direction: column;
     margin-bottom: 1rem;
   }
-}
+} */

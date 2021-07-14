@@ -1,5 +1,7 @@
 import * as actiontypes from "./authActionType";
 import axios from "../../helpers/axios";
+import { loadingFail } from "./loadingActions";
+import { loadShop } from "./shopActions";
 
 export const load_user = () => async (dispatch) => {
   if (localStorage.getItem("access")) {
@@ -18,6 +20,9 @@ export const load_user = () => async (dispatch) => {
         type: actiontypes.USER_LOADED_SUCCESS,
         payload: res.data,
       });
+
+      // loading shop of user
+      dispatch(loadShop(res.data));
     } catch (error) {
       dispatch({
         type: actiontypes.USER_LOADED_FAIL,
@@ -43,17 +48,18 @@ export const login = (userCredentials) => async (dispatch) => {
 
   try {
     const res = await axios.post("/auth/jwt/create/", body, config);
-
+    console.log(res);
     dispatch({
       type: actiontypes.LOGIN_SUCCESS,
       payload: res.data,
     });
-
     dispatch(load_user());
   } catch (error) {
+    console.log(error);
     dispatch({
       type: actiontypes.LOGIN_FAIL,
     });
+    dispatch(loadingFail("Invalid Credentials"));
   }
 };
 

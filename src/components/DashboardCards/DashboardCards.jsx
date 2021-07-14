@@ -11,6 +11,7 @@ import axios from "../../helpers/axios";
 import { useSelector } from "react-redux";
 import { format } from "timeago.js";
 import numberFormatter from "../../helpers/numberFormatter";
+import { salesData as dummySalesData } from "../../helpers/dummyData";
 
 function DashboardCards({ active, setActive }) {
   const { id } = useSelector((state) => state.shop.shop);
@@ -18,6 +19,11 @@ function DashboardCards({ active, setActive }) {
   const [inventoryData, setInventoryData] = useState({});
   const [salesData, setSalesData] = useState({});
   const [reportsData, setReportsData] = useState({});
+
+  let salesTotal = 0;
+  dummySalesData.forEach((s) => {
+    salesTotal += s.sales;
+  });
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -32,8 +38,6 @@ function DashboardCards({ active, setActive }) {
     };
     fetchDashboardData();
   }, [id]);
-
-  // dashboard/<int:shop_id>
 
   return (
     <div className="dashboard__cardsContainer">
@@ -78,7 +82,7 @@ function DashboardCards({ active, setActive }) {
             Sales
           </span>
           <div className="dashboard__cardInfo">
-            <h1>₹​ {numberFormatter(salesData.total)} </h1>
+            <h1>₹​ {numberFormatter(salesTotal)} </h1>
             <p className="dashboard__cardInfoPercentage">
               {salesData.trend + salesData.percentage}
             </p>

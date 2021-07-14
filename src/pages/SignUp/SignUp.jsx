@@ -201,7 +201,7 @@ function SignUp() {
           </form>
         </Paper>
       </Container>
-      <ToastContainer className="ml-3 mb-3" />
+      <ToastContainer className="" />
     </div>
   );
 }

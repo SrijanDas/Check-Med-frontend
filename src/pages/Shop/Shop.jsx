@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import "./Shop.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   Card,
   CardContent,
@@ -10,32 +10,10 @@ import {
 } from "@material-ui/core";
 
 import ShopCreate from "../../components/ShopCreate/ShopCreate";
-import {
-  loadingStart,
-  loadingSuccess,
-} from "../../store/actions/loadingActions";
-import { loadShop } from "../../store/actions/shopActions";
 import { useHistory } from "react-router-dom";
 
 function ShopDetails() {
-  const user = useSelector((state) => state.auth.user);
   const shop = useSelector((state) => state.shop.shop);
-  const timer = useRef();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const fetchStore = async () => {
-      dispatch(loadingStart());
-      if (user) {
-        dispatch(loadShop(user));
-      }
-    };
-    fetchStore();
-
-    timer.current = setTimeout(() => {
-      dispatch(loadingSuccess());
-    }, 500);
-  }, [user, dispatch]);
 
   const history = useHistory();
 

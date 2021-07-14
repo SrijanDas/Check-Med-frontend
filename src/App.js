@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const shop = useSelector((state) => state.shop.shop);
   return (
     <Router>
       <Layout>
@@ -40,16 +41,16 @@ function App() {
             {isAuthenticated ? <Redirect to="/shop" /> : <Login />}
           </Route>
           <Route path="/sign-up">
-            {isAuthenticated ? <Redirect to="/login" /> : <SignUp />}
+            {isAuthenticated ? <Redirect to="/" /> : <SignUp />}
           </Route>
           <Route path="/signup-success">
-            {isAuthenticated ? <Redirect to="/login" /> : <SignupSuccess />}
+            {isAuthenticated ? <Redirect to="/" /> : <SignupSuccess />}
           </Route>
           <Route path="/activate/:uid/:token">
             <Activation />
           </Route>
           <Route path="/dashboard">
-            {isAuthenticated ? <Dashboard /> : <Redirect to="/login" />}
+            {isAuthenticated && shop ? <Dashboard /> : <Redirect to="/login" />}
           </Route>
           <Route path="/shop">
             {isAuthenticated ? <Shop /> : <Redirect to="/login" />}
