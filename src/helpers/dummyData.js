@@ -58,28 +58,47 @@ export const licenseNumbers = [123, 124, 235, 564];
 //   },
 // ];
 
-export const reportColumns = [
-  { title: "Report ID", field: "reportId" },
-  { title: "Action Taken", field: "actionTaken" },
-  { title: "Status", field: "status" },
-];
-
 export const reportData = [
   {
     reportId: "1",
+    actionTaken: "Resolved",
+    status: "Pending",
+  },
+  {
+    reportId: "2",
     actionTaken: "Resolved",
     status: "Accepted",
   },
 
   {
-    reportId: "2",
+    reportId: "3",
     actionTaken: "Can't be solved",
-    status: "Pending",
+    status: "Rejected",
   },
   {
-    reportId: "3",
+    reportId: "4",
+    actionTaken: "Can't be solved",
+    status: "Accepted",
+  },
+  {
+    reportId: "5",
     actionTaken: "False report",
-    status: "Rejected",
+    status: "Accepted",
+  },
+  {
+    reportId: "6",
+    actionTaken: "False report",
+    status: "Accepted",
+  },
+  {
+    reportId: "7",
+    actionTaken: "Resolved",
+    status: "Accepted",
+  },
+  {
+    reportId: "8",
+    actionTaken: "Resolved",
+    status: "Accepted",
   },
 ];
 
@@ -109,7 +128,7 @@ export const salesData = [
     sales: faker.commerce.price() * 10,
   },
   {
-    name: "JUl",
+    name: "JUL",
     sales: faker.commerce.price() * 10,
   },
   {

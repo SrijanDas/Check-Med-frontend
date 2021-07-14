@@ -27,12 +27,12 @@ function ShopCard({ cardData }) {
           subheader={`Updated: ${format(inventory.date)}`}
         />
         <CardContent>
-          <Typography variant="h4">{shop.name}</Typography>
+          <Typography variant="h5">{shop.name}</Typography>
           <Typography variant="subtitle1" color="textSecondary">
             {`${shop.address}, ${shop.state}, ${shop.district} - ${shop.pincode}`}
           </Typography>
           <Typography gutterBottom variant="h6">
-            Contact: 12345678
+            Contact: 98312345678
           </Typography>
           <span className={`quantity ${lowStock ? "lowstock" : ""}`}>
             Qty: {inStock}

@@ -17,6 +17,7 @@ import SignupSuccess from "./pages/SignupSuccess";
 import Layout from "./layout/Layout";
 
 import { useSelector } from "react-redux";
+import Orders from "./pages/Orders/Orders";
 
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -54,6 +55,9 @@ function App() {
           </Route>
           <Route path="/shop">
             {isAuthenticated ? <Shop /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/orders">
+            {isAuthenticated && shop ? <Orders /> : <Redirect to="/" />}
           </Route>
         </Switch>
       </Layout>

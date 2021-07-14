@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
 import DashboardCards from "../../components/DashboardCards/DashboardCards";
 import DashboardTools from "../../components/DashboardTools/DashboardTools";
@@ -12,14 +12,20 @@ import { Container, Grid } from "@material-ui/core";
 function Dashboard() {
   const [active, setActive] = useState();
   const shop = useSelector((state) => state.shop.shop);
-  if (!shop) return <Redirect to="/shop" />;
+  const [page, setPage] = useState(0);
+
+  useEffect(() => {
+    if (!shop) {
+      return <Redirect to="/shop" />;
+    }
+  }, [shop]);
 
   return (
     <div className="dashboardContainer">
       <Container className="dashboard" maxWidth="lg">
         <Grid container spacing={2}>
           <Grid item xs={2}>
-            <DashboardTools className="dashboard__tools" />
+            <DashboardTools page={page} className="dashboard__tools" />
           </Grid>
           <Grid className="dashboard__right" item xs={10}>
             <div className="dashboard__rightCards">

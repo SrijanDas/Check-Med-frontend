@@ -1,9 +1,6 @@
 .dashboardContainer {
   background: linear-gradient(90deg, #fbfbff 50%, white 50%);
 }
-.dashboard__tools {
-  width: 20%;
-}
 
 .dashboard__right {
   margin-top: 1rem !important;
