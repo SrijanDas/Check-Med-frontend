@@ -1,9 +1,9 @@
-import { reportData } from "../../helpers/dummyData";
-import "./Reports.css";
-import MaterialTable from "material-table";
 import { Paper } from "@material-ui/core";
-
-function Reports() {
+import MaterialTable from "material-table";
+import React from "react";
+import { reportData } from "../../helpers/dummyData";
+import ReportTimeline from "../ReportTimeline/ReportTimeline";
+function ReportsPage() {
   const reportColumns = [
     {
       title: "ID",
@@ -56,14 +56,19 @@ function Reports() {
             headerStyle: {
               color: "#1976D2",
             },
+            paging: false,
           }}
           title={title}
           columns={columns}
           data={data}
+          detailPanel={(rowData) => {
+            return <ReportTimeline />;
+          }}
+          onRowClick={(event, rowData, togglePanel) => togglePanel()}
         />
       </div>
     </div>
   );
 }
 
-export default Reports;
+export default ReportsPage;

@@ -1,0 +1,38 @@
+.reportTable__container {
+  padding: 1rem;
+}
+.reportTable {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.reportTable_row {
+  border-radius: 10px;
+  text-align: center;
+  padding: 0.4rem;
+  width: 50%;
+}
+
+.reportTable_row.Resolved {
+  background-color: #e8f5e9;
+  color: #1b5e20;
+}
+
+.reportTable_row.FalseReport {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+.reportTable_row.Cbs {
+  background-color: #eceff1;
+  color: #607d8b;
+}
+.reportTable_row.rejected {
+  background-color: #fbe9e7;
+  color: #bf360c;
+}
+.reportTable_row.pending {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+}

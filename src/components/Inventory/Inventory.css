@@ -1,7 +1,8 @@
+.inventory__tableContainer {
+  padding: 1rem;
+}
 .inventory__table {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
   border-radius: 10px;
-}
-.inventory__tableContainer {
   padding: 1rem;
 }

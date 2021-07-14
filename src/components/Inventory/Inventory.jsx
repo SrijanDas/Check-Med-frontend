@@ -3,6 +3,7 @@ import "./Inventory.css";
 import MaterialTable from "material-table";
 import { useSelector } from "react-redux";
 import axios from "../../helpers/axios";
+import { Paper } from "@material-ui/core";
 
 function Inventory() {
   const [data, setData] = useState();
@@ -39,6 +40,9 @@ function Inventory() {
     <div className="inventory__tableContainer">
       <div className="inventory__table">
         <MaterialTable
+          components={{
+            Container: (props) => <Paper {...props} elevation={0} />,
+          }}
           options={{
             actionsColumnIndex: -1,
             addRowPosition: "first",

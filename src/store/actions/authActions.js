@@ -48,7 +48,6 @@ export const login = (userCredentials) => async (dispatch) => {
 
   try {
     const res = await axios.post("/auth/jwt/create/", body, config);
-    console.log(res);
     dispatch({
       type: actiontypes.LOGIN_SUCCESS,
       payload: res.data,

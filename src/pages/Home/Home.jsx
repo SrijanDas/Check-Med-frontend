@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Home.css";
 import ShopCard from "../../components/ShopCard/ShopCard";
 import SearchForm from "../../components/SearchForm/SearchForm";
@@ -10,6 +10,11 @@ import Button from "@material-ui/core/Button";
 function Home() {
   const [cards, setCards] = useState([]);
   const [showHeader, setShowHeader] = useState(false);
+
+  const scrollRef = useRef();
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [cards]);
 
   return (
     <div className="homePage ">
@@ -28,12 +33,12 @@ function Home() {
         <SearchForm setCards={setCards} setShowHeader={setShowHeader} />
 
         {/* cards */}
-        <div className="homePage__shopCardsContainer">
+        <div className="homePage__shopCardsContainer" ref={scrollRef}>
           {showHeader ? (
             cards.length ? (
-              <h4 style={{ fontWeight: 400 }} className="header">
+              <h3 style={{ fontWeight: 400 }} className="header">
                 Medicine is available here...
-              </h4>
+              </h3>
             ) : (
               <div className="alertBox">
                 <span className="alertBox__text">

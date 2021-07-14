@@ -94,7 +94,7 @@ function DashboardCards({ active, setActive }) {
               ""
             )}
           </div>
-          <span className="dashboard__cardFooter">Compared to last month</span>
+          <span className="dashboard__cardFooter">Compared to last year</span>
         </CardContent>
       </Card>
 
