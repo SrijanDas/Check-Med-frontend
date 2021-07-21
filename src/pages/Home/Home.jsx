@@ -3,13 +3,13 @@ import "./Home.css";
 import ShopCard from "../../components/ShopCard/ShopCard";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import SentimentDissatisfiedIcon from "@material-ui/icons/SentimentDissatisfied";
-import Container from "@material-ui/core/Container";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
-import Button from "@material-ui/core/Button";
+import { Divider, Typography, Button, Container } from "@material-ui/core";
 
 function Home() {
   const [cards, setCards] = useState([]);
   const [showHeader, setShowHeader] = useState(false);
+  const [medicine, setMedicine] = useState({});
 
   const scrollRef = useRef();
   useEffect(() => {
@@ -30,18 +30,36 @@ function Home() {
           </Button>
         </div>
 
-        <SearchForm setCards={setCards} setShowHeader={setShowHeader} />
+        <SearchForm
+          setCards={setCards}
+          setMedicine={setMedicine}
+          setShowHeader={setShowHeader}
+        />
 
         {/* cards */}
         <div className="homePage__shopCardsContainer" ref={scrollRef}>
           {showHeader ? (
             cards.length ? (
-              <h3 style={{ fontWeight: 400 }} className="header">
-                Medicine is available here...
-              </h3>
+              <>
+                <Divider style={{ marginBottom: "10px" }} />
+                <Typography
+                  variant="h6"
+                  color="textSecondary"
+                  style={{ marginBottom: "15px" }}
+                  gutterBottom
+                >
+                  Showing results for: "<b>{medicine.name}</b>"
+                </Typography>
+                {/* <Typography variant="h6" gutterBottom>
+                  Price: INR {medicine.price}
+                </Typography> */}
+              </>
             ) : (
               <div className="alertBox">
-                <span className="alertBox__text">
+                <span
+                  className="alertBox__text"
+                  style={{ display: "flex", alignItems: "center" }}
+                >
                   This medicine is not available at your location{" "}
                   <SentimentDissatisfiedIcon />
                 </span>
