@@ -7,6 +7,7 @@ import {
   Button,
   TextField,
   Typography,
+  Container,
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -15,6 +16,7 @@ import {
 } from "../../store/actions/loadingActions";
 import { stateNames, districts } from "../../helpers/dummyData";
 import { createShop } from "../../store/actions/shopActions";
+import { useHistory } from "react-router-dom";
 
 function ShopCreate(props) {
   const user = useSelector((state) => state.auth.user);
@@ -29,6 +31,7 @@ function ShopCreate(props) {
 
   const dispatch = useDispatch();
   const timer = useRef();
+  const history = useHistory();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -37,14 +40,14 @@ function ShopCreate(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(loadingStart());
-    await dispatch(createShop(user, formData));
-    timer.current = setTimeout(() => {
+    dispatch(createShop(user, formData));
+    timer.current = window.setTimeout(() => {
       dispatch(loadingSuccess());
+      history.push("/dashboard");
     }, 1000);
-    window.location.reload();
   };
   return (
-    <div>
+    <Container maxWidth="md">
       <Card className="shopCreate__card">
         <Typography
           className="shopCreate__cardHeader"
@@ -131,7 +134,7 @@ function ShopCreate(props) {
           </CardActions>
         </form>
       </Card>
-    </div>
+    </Container>
   );
 }
 

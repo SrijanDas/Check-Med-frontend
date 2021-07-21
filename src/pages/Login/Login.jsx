@@ -22,19 +22,19 @@ import {
 
 function Login() {
   const classes = useStyles();
-  const timer = useRef();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const timer = useRef();
 
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     dispatch(loadingStart());
+    e.preventDefault();
     timer.current = window.setTimeout(() => {
       dispatch(login({ email: email, password: password }));
       dispatch(loadingSuccess());
-    }, 300);
+    }, 1000);
   };
 
   return (

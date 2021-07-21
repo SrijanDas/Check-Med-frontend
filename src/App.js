@@ -5,6 +5,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import Layout from "./layout/Layout";
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Login from "./pages/Login/Login";
@@ -12,9 +13,10 @@ import SignUp from "./pages/SignUp/SignUp";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Logout from "./pages/Logout/Logout";
 import Activation from "./pages/Activation/Activation";
-import Shop from "./pages/Shop/Shop";
 import SignupSuccess from "./pages/SignupSuccess";
-import Layout from "./layout/Layout";
+import ShopCreate from "./pages/ShopCreate/ShopCreate";
+import Contact from "./pages/Contact/Contact";
+import Feedback from "./pages/Feedback/Feedback";
 
 import { useSelector } from "react-redux";
 
@@ -34,11 +36,17 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
+          <Route path="/feedback">
+            <Feedback />
+          </Route>
           <Route path="/logout">
             <Logout />
           </Route>
           <Route path="/login">
-            {isAuthenticated ? <Redirect to="/shop" /> : <Login />}
+            {isAuthenticated ? <Redirect to="/" /> : <Login />}
           </Route>
           <Route path="/sign-up">
             {isAuthenticated ? <Redirect to="/" /> : <SignUp />}
@@ -50,10 +58,10 @@ function App() {
             <Activation />
           </Route>
           <Route path="/dashboard">
-            {isAuthenticated && shop ? <Dashboard /> : <Redirect to="/login" />}
+            {isAuthenticated ? <Dashboard /> : <Redirect to="/" />}
           </Route>
-          <Route path="/shop">
-            {isAuthenticated ? <Shop /> : <Redirect to="/login" />}
+          <Route path="/createShop">
+            {shop ? <ShopCreate /> : <Redirect to="/dashboard" />}
           </Route>
         </Switch>
       </Layout>

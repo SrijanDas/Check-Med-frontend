@@ -1,21 +1,27 @@
 import React, { useState } from "react";
 import axios from "../../helpers/axios";
 import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { districts, stateNames } from "../../helpers/dummyData";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./SearchForm.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loadingStart,
+  loadingSuccess,
+} from "../../store/actions/loadingActions";
 
-function SearchForm({ setCards, setShowHeader }) {
+function SearchForm({ setCards, setShowHeader, setMedicine }) {
   const [medicineName, setMedicineName] = useState("");
   const [query, setQuery] = useState("");
   const [stateName, setStateName] = useState("West Bengal");
   const [district, setDistrict] = useState("Howrah");
   const [btnSelect, setBtnSelect] = useState("1");
-  const [isLoading, setIsLoading] = useState(false);
+
+  const isLoading = useSelector((state) => state.loading.isLoading);
+  const dispatch = useDispatch();
 
   const buttons = [
     { name: "Search by PIN", value: "1" },
@@ -37,8 +43,8 @@ function SearchForm({ setCards, setShowHeader }) {
   };
 
   const handleSearch = async (e) => {
+    dispatch(loadingStart());
     e.preventDefault();
-    setIsLoading(true);
     let formData = {};
     if (btnSelect === "1") {
       formData = {
@@ -58,7 +64,8 @@ function SearchForm({ setCards, setShowHeader }) {
     try {
       const response = await axios.post("/search", formData);
       setShowHeader(true);
-      setCards(response.data);
+      setCards(response.data.shops);
+      setMedicine(response.data.medicine);
     } catch (error) {
       clearStates();
       toast.error("Something went wrong! 😟", {
@@ -71,7 +78,7 @@ function SearchForm({ setCards, setShowHeader }) {
         progress: undefined,
       });
     }
-    setIsLoading(false);
+    dispatch(loadingSuccess());
   };
 
   return (
@@ -185,11 +192,7 @@ function SearchForm({ setCards, setShowHeader }) {
             disabled={isLoading}
             variant="contained"
           >
-            {isLoading ? (
-              <CircularProgress color="inherit" size={25} />
-            ) : (
-              "Search"
-            )}
+            {isLoading ? "Searching ..." : "Search"}
           </Button>
         </form>
       )}

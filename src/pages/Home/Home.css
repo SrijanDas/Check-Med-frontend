@@ -20,11 +20,18 @@ input[type="number"] {
   margin-top: 1rem;
 }
 .homePage__shopCardsContainer {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .homepage__covidUpdatesBtnContainer {
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
+}
+.homePage__medicineNameContainer {
+  display: flex;
+  align-items: center;
+}
+.homePage__medicineNameContainer h5 {
+  margin-right: 5px !important;
 }

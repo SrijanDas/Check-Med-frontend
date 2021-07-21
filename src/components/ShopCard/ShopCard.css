@@ -10,6 +10,8 @@
 .shopCard__header {
   color: #4caf50 !important;
   background-color: #e8f5e9;
+}
+.shopCard__header span {
   font-size: 1rem !important;
 }
 

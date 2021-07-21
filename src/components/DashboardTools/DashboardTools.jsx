@@ -4,13 +4,14 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import StoreIcon from "@material-ui/icons/Store";
 import ReportIcon from "@material-ui/icons/Report";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-// import BarChartIcon from "@material-ui/icons/BarChart";
+import LocalMallIcon from "@material-ui/icons/LocalMall";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 
 function DashboardTools({ page, setPage }) {
   const optionsList = [
     { icon: <DashboardIcon />, text: "Dashboard", id: 0 },
     { icon: <StoreIcon />, text: "Shop Details", id: 1 },
+    { icon: <LocalMallIcon />, text: "Inventory", id: 5 },
     { icon: <ListAltIcon />, text: "Orders", id: 2 },
     { icon: <NotificationsIcon />, text: "Notifications", id: 3 },
     { icon: <ReportIcon />, text: "Reports", id: 4 },
