@@ -27,7 +27,7 @@ export const createShop = (user, formData) => async (dispatch) => {
     user: user.id,
     name: formData.shopName,
     phone: formData.phone,
-    address: formData.stateName,
+    address: formData.address,
     state: formData.stateName,
     district: formData.district,
     pincode: formData.pin,
@@ -48,4 +48,10 @@ export const createShop = (user, formData) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const deleteShop = () => async (dispatch) => {
+  dispatch({
+    type: shopActionTypes.SHOP_DELETE,
+  });
 };

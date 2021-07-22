@@ -13,13 +13,14 @@ const shopReducer = (state = initialState, action) => {
         ...state,
         shop: payload,
       };
-
+    case actionTypes.SHOP_DELETE:
     case actionTypes.SHOP_CREATE_FAIL:
     case actionTypes.SHOP_LOADED_FAIL:
       return {
         ...state,
         shop: null,
       };
+
     default:
       return state;
   }

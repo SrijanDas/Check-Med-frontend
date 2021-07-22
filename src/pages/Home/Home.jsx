@@ -3,8 +3,7 @@ import "./Home.css";
 import ShopCard from "../../components/ShopCard/ShopCard";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import SentimentDissatisfiedIcon from "@material-ui/icons/SentimentDissatisfied";
-import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
-import { Divider, Typography, Button, Container } from "@material-ui/core";
+import { Divider, Typography, Container } from "@material-ui/core";
 
 function Home() {
   const [cards, setCards] = useState([]);
@@ -19,17 +18,6 @@ function Home() {
   return (
     <div className="homePage ">
       <Container maxWidth="md">
-        <div className="homepage__covidUpdatesBtnContainer">
-          <Button
-            variant="outlined"
-            size="large"
-            startIcon={<ErrorOutlineIcon color="secondary" />}
-            className="homepage__covidUpdatesBtn"
-          >
-            Covid-19 Updates
-          </Button>
-        </div>
-
         <SearchForm
           setCards={setCards}
           setMedicine={setMedicine}
