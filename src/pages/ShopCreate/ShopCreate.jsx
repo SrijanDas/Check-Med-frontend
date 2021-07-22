@@ -8,6 +8,7 @@ import {
   TextField,
   Typography,
   Container,
+  InputAdornment,
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -23,6 +24,7 @@ function ShopCreate(props) {
 
   const [formData, setFormData] = useState({
     shopName: "",
+    phone: "",
     address: "",
     stateName: "West Bengal",
     district: "Howrah",
@@ -68,6 +70,21 @@ function ShopCreate(props) {
               label="Shop Name"
               type="text"
               onChange={handleChange}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="phone"
+              label="Phone"
+              type="number"
+              onChange={handleChange}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">+91 </InputAdornment>
+                ),
+              }}
             />
             <TextField
               variant="outlined"

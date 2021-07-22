@@ -26,6 +26,7 @@ export const createShop = (user, formData) => async (dispatch) => {
   const body = {
     user: user.id,
     name: formData.shopName,
+    phone: formData.phone,
     address: formData.stateName,
     state: formData.stateName,
     district: formData.district,

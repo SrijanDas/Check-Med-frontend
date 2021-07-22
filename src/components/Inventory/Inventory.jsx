@@ -1,13 +1,32 @@
 import React, { useState, useEffect } from "react";
 import "./Inventory.css";
-import MaterialTable from "material-table";
+import MaterialTable, { MTableToolbar } from "material-table";
 import { useSelector } from "react-redux";
 import axios from "../../helpers/axios";
-import { Paper } from "@material-ui/core";
+import { Paper, Button } from "@material-ui/core";
+import SyncIcon from "@material-ui/icons/Sync";
 
 function Inventory() {
   const [data, setData] = useState();
   const shop = useSelector((state) => state.shop.shop);
+  const [updateData, setUpdateData] = useState(false);
+
+  const sendToDb = async (newData) => {
+    try {
+      newData.shop_id = shop.id;
+      await axios.post("/inventory/add/", newData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteItem = async (item) => {
+    try {
+      await axios.post("/inventory/del/", item);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const getInventoryData = async () => {
@@ -17,7 +36,7 @@ function Inventory() {
       } catch (error) {}
     };
     getInventoryData();
-  }, [shop]);
+  }, [shop, updateData]);
 
   const columns = [
     {
@@ -26,7 +45,7 @@ function Inventory() {
       align: "left",
     },
     { title: "Qty", field: "quantity", type: "numeric", align: "left" },
-    { title: "Price", field: "medicine.price", type: "numeric", align: "left" },
+    { title: "Price", field: "price", type: "numeric", align: "left" },
     {
       title: "Total",
       field: "total",
@@ -42,10 +61,24 @@ function Inventory() {
         <MaterialTable
           components={{
             Container: (props) => <Paper {...props} elevation={0} />,
+            Toolbar: (props) => (
+              <div>
+                <MTableToolbar {...props} />
+                <Button
+                  onClick={() => {
+                    setUpdateData(!updateData);
+                  }}
+                  startIcon={<SyncIcon />}
+                  className="inventory__syncBtn"
+                  variant="outlined"
+                >
+                  Sync
+                </Button>
+              </div>
+            ),
           }}
           options={{
             actionsColumnIndex: -1,
-            addRowPosition: "first",
             selection: true,
             headerStyle: {
               color: "#1976D2",
@@ -66,6 +99,10 @@ function Inventory() {
             onRowAdd: (newData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
+                  const { quantity, price } = newData;
+                  newData.total = price * quantity;
+                  newData.date = "just now";
+                  sendToDb(newData);
                   setData([...data, newData]);
                   resolve();
                 }, 1000);
@@ -86,7 +123,9 @@ function Inventory() {
                 setTimeout(() => {
                   const dataDelete = [...data];
                   const index = oldData.tableData.id;
+                  deleteItem(dataDelete[index]);
                   dataDelete.splice(index, 1);
+
                   setData([...dataDelete]);
 
                   resolve();

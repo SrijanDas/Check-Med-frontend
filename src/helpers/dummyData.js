@@ -18,7 +18,7 @@ export const districts = [
   },
 ];
 
-export const licenseNumbers = [123, 124, 235, 564];
+export const licenseNumbers = [123456, 124, 235, 564];
 
 // export const inventoryColumns = [
 //   { title: "Medicine Name", field: "medicineName" },
@@ -155,19 +155,19 @@ export const salesData = [
 
 export const topSellersData = [
   {
-    name: "Paracetamol",
-    unitsSold: 200,
+    name: "Digin",
+    unitsSold: 400,
   },
   {
-    name: "Ecord",
-    unitsSold: 50,
+    name: "Paracetamol",
+    unitsSold: 200,
   },
   {
     name: "Aspirin",
     unitsSold: 100,
   },
   {
-    name: "Digin",
-    unitsSold: 400,
+    name: "Ecord",
+    unitsSold: 50,
   },
 ];

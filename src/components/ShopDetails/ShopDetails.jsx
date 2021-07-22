@@ -13,7 +13,7 @@ function ShopDetails(props) {
       <Card className="shop__card">
         <CardContent>
           <h3 className="dashboard__shopName">{shop.name}</h3>
-          <p>Contact No: 1234567</p>
+          <p>Contact No: {shop.phone}</p>
           <p>
             Address: {shop.address}, {shop.state}, {shop.district}, PIN-
             {shop.pincode}

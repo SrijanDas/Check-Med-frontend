@@ -6,3 +6,8 @@
   border-radius: 10px;
   padding: 1rem;
 }
+
+.inventory__syncBtn {
+  text-transform: capitalize !important;
+  margin-bottom: 1rem;
+}

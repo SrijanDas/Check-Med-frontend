@@ -2,10 +2,10 @@ import React from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
+// import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
+// import Button from "@material-ui/core/Button";
+// import LocationOnIcon from "@material-ui/icons/LocationOn";
 import { format } from "timeago.js";
 import "./ShopCard.css";
 
@@ -32,14 +32,17 @@ function ShopCard({ cardData }) {
             {`${shop.address}, ${shop.state}, ${shop.district} - ${shop.pincode}`}
           </Typography>
           <Typography gutterBottom variant="h6">
-            Contact: 98312345678
+            Contact: {shop.phone}
+          </Typography>
+          <Typography gutterBottom variant="h6">
+            Price: {inventory.price} INR
           </Typography>
           <span className={`quantity ${lowStock ? "lowstock" : ""}`}>
             Qty: {inStock}
           </span>
           <Typography>{}</Typography>
         </CardContent>
-        <CardActions className="cardActions">
+        {/* <CardActions className="cardActions">
           <Button size="small" color="primary">
             View Details
           </Button>
@@ -49,7 +52,7 @@ function ShopCard({ cardData }) {
           <Button size="small" color="primary">
             Report
           </Button>
-        </CardActions>
+        </CardActions> */}
       </Card>
     </>
   );

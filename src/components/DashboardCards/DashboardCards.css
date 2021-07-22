@@ -12,7 +12,11 @@
   width: 30%;
   border: 2px solid white;
 }
-
+.dashboard__cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .dashboard__cardTitle {
   display: flex;
   align-items: center;

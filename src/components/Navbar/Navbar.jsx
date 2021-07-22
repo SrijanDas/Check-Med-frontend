@@ -5,9 +5,11 @@ import Button from "@material-ui/core/Button";
 import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/Drawer";
 import Sidebar from "../Sidebar/Sidebar";
+import { useSelector } from "react-redux";
 
 function Navbar(props) {
   const [open, setOpen] = useState(false);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -38,7 +40,7 @@ function Navbar(props) {
       </div>
 
       <div className="navbar__rightBtns">
-        {props.isAuthenticated ? (
+        {isAuthenticated ? (
           <>
             <Button
               component={Link}
